@@ -39,27 +39,35 @@
             </div>
         </div>
     </div>
-        <div id="main-app" style="display: none;" class="min-h-screen flex flex-col pb-24 w-full max-w-md bg-gray-50 shadow-2xl relative">
-        <header class="bg-gradient-to-b from-blue-700 to-blue-600 text-white px-5 pt-7 pb-16 rounded-b-[2.5rem] shadow-md sticky top-0 z-30">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center space-x-3">
-                    <div id="app-logo-container" class="relative cursor-pointer group" onclick="triggerAppLogoUpload()">
-                        <img id="app-logo-main" src="" class="w-11 h-11 rounded-xl object-cover border border-white/20 shadow-inner">
+
+    <div id="main-app" style="display: none;" class="min-h-screen flex flex-col pb-24 w-full max-w-md bg-gray-50 shadow-2xl relative">
+        
+        <header class="relative w-full overflow-hidden rounded-b-[2.5rem] shadow-md bg-blue-700 sticky top-0 z-30 min-h-[150px]">
+            <div class="absolute inset-0 w-full h-full cursor-pointer group" onclick="triggerAppCoverUpload()">
+                <img id="app-cover-main" src="https://placehold.co/800x400/1e40af/ffffff?text=Thăng+Tiến+Miền+Thành+Phố" class="w-full h-full object-cover">
+                <input type="file" id="app-cover-input" class="hidden" accept="image/*" onchange="previewAppCover(event)">
+                <div id="cover-hover-text" class="absolute inset-0 bg-black/30 items-center justify-center text-xs font-bold text-white hidden group-hover:flex">THAY ẢNH BÌA</div>
+            </div>
+            
+            <div class="absolute bottom-4 left-5 right-5 flex justify-between items-end z-10 pointer-events-none">
+                <div class="flex items-center space-x-3 pointer-events-auto">
+                    <div class="relative cursor-pointer group" onclick="triggerAppLogoUpload()">
+                        <img id="app-logo-main" src="" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md bg-white">
                         <input type="file" id="app-logo-input" class="hidden" accept="image/*" onchange="previewAppLogo(event)">
-                        <div id="app-logo-hover-text" class="absolute inset-0 bg-black/40 rounded-xl items-center justify-center text-[8px] font-bold hidden">ĐỔI</div>
+                        <div id="app-logo-hover-text" class="absolute inset-0 bg-black/40 rounded-full items-center justify-center text-[9px] font-bold text-white hidden group-hover:flex">ĐỔI</div>
                     </div>
-                    <div>
-                        <h2 class="text-sm font-black tracking-tight">Thiện Nguyện Thăng Tiến - TP</h2>
-                        <p id="user-role-badge" class="text-[10px] text-blue-100 font-medium bg-blue-800/50 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-blue-400/20">Đội Trưởng</p>
+                    <div class="text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+                        <h2 class="text-sm font-black tracking-tight">TNTT - MTP</h2>
+                        <p id="user-role-badge" class="text-[9px] text-blue-100 font-bold bg-blue-900/80 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-white/10">Đội Trưởng</p>
                     </div>
                 </div>
-                <button onclick="handleLogout()" class="p-2.5 bg-white/10 hover:bg-white/20 rounded-xl transition text-blue-100 hover:text-white backdrop-blur-md">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path></svg>
+                <button onclick="handleLogout()" class="p-2 bg-black/30 hover:bg-black/50 rounded-xl transition text-white backdrop-blur-sm border border-white/10 pointer-events-auto">
+                    <svg class="w-4 window-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path></svg>
                 </button>
             </div>
         </header>
 
-        <main class="px-4 -mt-10 flex-1 z-40 space-y-4">
+        <main class="px-4 mt-4 flex-1 z-20 space-y-4">
             <div id="lock-banner" class="hidden w-full bg-amber-50 border border-amber-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-sm">
                 <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
                 <div>
@@ -81,7 +89,8 @@
                 </div>
                 <div class="flex items-center space-x-1 border-t border-gray-100 pt-2" id="week-tabs-container"></div>
             </div>
-                        <div id="tab-content-attendance" class="space-y-4">
+
+            <div id="tab-content-attendance" class="space-y-4">
                 <div class="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
                     <div class="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/70">
                         <div>
@@ -154,7 +163,8 @@
                 </div>
             </div>
         </main>
-                    <nav class="fixed bottom-0 w-full max-w-md bg-white/95 backdrop-blur-md border-t border-gray-200/80 px-4 py-3 flex justify-around items-center shadow-[0_-5px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-3xl">
+
+        <nav class="fixed bottom-0 w-full max-w-md bg-white/95 backdrop-blur-md border-t border-gray-200/80 px-4 py-3 flex justify-around items-center shadow-[0_-5px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-3xl">
             <button id="nav-btn-attendance" onclick="switchTab('attendance')" class="flex flex-col items-center space-y-1 text-blue-600 font-bold transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 <span class="text-[10px] tracking-tight">Điểm Danh</span>
@@ -191,7 +201,7 @@
         <div id="member-edit-modal" class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
             <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 border border-gray-100 my-auto">
                 <h3 class="text-base font-black text-gray-900 mb-1">Chỉnh Sửa Hồ Sơ</h3>
-                <p class="text-xs text-gray-400 mb-4">Cập nhật thông tin chi tiết và tải ảnh chân dung thành viên.</p>
+                <p class="text-xs text-gray-400 mb-4">Cập nhật thông tin lý lịch chi tiết và tải ảnh chân dung thành viên.</p>
                 <input type="hidden" id="edit-mem-id">
                 <div class="space-y-3 text-xs max-h-[50vh] overflow-y-auto px-1 hide-scrollbar">
                     <div class="flex flex-col items-center mb-2">
@@ -215,11 +225,11 @@
     </div>
 
     <script>
-                // KHO DỮ LIỆU GỐC THÀNH VIÊN
+        // KHO DỮ LIỆU ĐỦ 126 THÀNH VIÊN TRÍCH XUẤT TỪ FILE EXCEL CỦA BẠN
         const STATIC_MEMBERS_DATA = [
-            // ĐỘI 1
+            // ĐỘI 1 - GALILEA
             { id: "TV-01-01", team: 1, saint: "Maria", name: "Huỳnh Khả Ái", gender: "Nữ", term: "2024 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
-            { id: "TV-01-02", team: 1, saint: "", name: "Phạm Châm Anh", gender: "Nữ", term: "Chưa cập nhật", phone: "0941939211", uni: "Tôn Đức Thắng", major: "Quản trị", scholarship: "Không", avatar: "" },
+            { id: "TV-01-02", team: 1, saint: "", name: "Phạm Châm Anh", gender: "Nữ", term: "", phone: "0941939211", uni: "Tôn Đức Thắng", major: "Quản trị", scholarship: "Không", avatar: "" },
             { id: "TV-01-03", team: 1, saint: "Anna", name: "Trương Hồng Ân", gender: "Nữ", term: "2024 - 2026", phone: "0899780934", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
             { id: "TV-01-04", team: 1, saint: "Terexa", name: "Nguyễn Hồng Thiên Ân", gender: "Nữ", term: "2023 - 2026", phone: "0565298277", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không", avatar: "" },
             { id: "TV-01-05", team: 1, saint: "", name: "Võ Hoàng Minh Chiến", gender: "Nam", term: "2025 - 2029", phone: "0358674917", uni: "Tôn Đức Thắng", major: "Kỹ thuật", scholarship: "Có", avatar: "" },
@@ -234,11 +244,130 @@
             { id: "TV-01-14", team: 1, saint: "", name: "Trương Sơn Tùng", gender: "Nam", term: "2023 - 2027", phone: "0944456521", uni: "Tôn Đức Thắng", major: "Điện tử", scholarship: "Không", avatar: "" },
             { id: "TV-01-15", team: 1, saint: "Monica", name: "Nguyễn Thị Ngọc Hân", gender: "Nữ", term: "2025 - 2028", phone: "0355010800", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Không", avatar: "" },
             { id: "TV-01-16", team: 1, saint: "Anna", name: "Lâm Nguyễn Anh Thư", gender: "Nữ", term: "2025 - 2029", phone: "0813060959", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
-            { id: "TV-01-17", team: 1, saint: "", name: "Ngọc Duyên", gender: "Nữ", term: "Chưa rõ", phone: "0901603723", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không", avatar: "" },
-            { id: "TV-01-18", team: 1, saint: "Maria", name: "Phạm Ngọc Lan Chi", gender: "Nữ", term: "Chưa rõ", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không", avatar: "" },
+            { id: "TV-01-17", team: 1, saint: "", name: "Ngọc Duyên", gender: "Nữ", term: "", phone: "0901603723", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không", avatar: "" },
+            { id: "TV-01-18", team: 1, saint: "Maria", name: "Phạm Ngọc Lan Chi", gender: "Nữ", term: "", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không", avatar: "" },
 
-            // ĐỘI 4
-            { id: "TV-04-05", team: 4, saint: "Giuse", name: "Nguyễn Phước Hoà Lâm", gender: "Nam", term: "2023 - 2027", phone: "0348319481", uni: "Tôn Đức Thắng", major: "Nội thất", scholarship: "Không", avatar: "" }
+            // ĐỘI 2 - NAZARETH
+            { id: "TV-02-01", team: 2, saint: "Anna", name: "Nguyễn Hoàng Mỹ Duyên", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Đại học Sài Gòn", major: "Sư phạm", scholarship: "Không", avatar: "" },
+            { id: "TV-02-02", team: 2, saint: "Phanxico", name: "Đặng Quỳnh Đoan", gender: "Nam", term: "2025 - 2028", phone: "0396676013", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-02-03", team: 2, saint: "Anna", name: "La Diễm Hương", gender: "Nữ", term: "2023 - 2027", phone: "0866727493", uni: "Đại học Mở", major: "Kinh tế", scholarship: "Không", avatar: "" },
+            { id: "TV-02-04", team: 2, saint: "Micae", name: "Nguyễn Hữu Khang", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không", avatar: "" },
+            { id: "TV-02-05", team: 2, saint: "Phero", name: "Đỗ Quang Linh", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Có", avatar: "" },
+            { id: "TV-02-06", team: 2, saint: "", name: "Trần Gia Mỹ", gender: "Nữ", term: "2022 - 2026", phone: "0378202400", uni: "Đại học Ngoại thương", major: "Logistics", scholarship: "Không", avatar: "" },
+            { id: "TV-02-07", team: 2, saint: "Giuse", name: "Hồ Khánh Nam", gender: "Nam", term: "2025 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật xây dựng", scholarship: "Không", avatar: "" },
+            { id: "TV-02-08", team: 2, saint: "", name: "Lê Thị Kim Ngân", gender: "Nữ", term: "2022 - 2026", phone: "0366967259", uni: "Đại học Kinh tế - Luật", major: "Luật thương mại", scholarship: "Không", avatar: "" },
+            { id: "TV-02-09", team: 2, saint: "Maria", name: "Nguyễn Thị Thanh Nhi", gender: "Nữ", term: "2023 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Dược học", scholarship: "Không", avatar: "" },
+            { id: "TV-02-10", team: 2, saint: "Phero", name: "Nguyễn Bảo Quốc", gender: "Nam", term: "2025 - 2028", phone: "0867855462", uni: "Đại học Bách Khoa", major: "Cơ khí", scholarship: "Không", avatar: "" },
+            { id: "TV-02-11", team: 2, saint: "Anê", name: "Ntơr K' Riêm", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Công tác xã hội", scholarship: "Có", avatar: "" },
+            { id: "TV-02-12", team: 2, saint: "Matta", name: "Đinh Lê Hồng Thuỷ", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Đại học Y Dược", major: "Điều dưỡng", scholarship: "Không", avatar: "" },
+            { id: "TV-02-13", team: 2, saint: "Terexa", name: "Nguyễn Hoài Trang Thương", gender: "Nữ", term: "2025 - 2030", phone: "0794345483", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-02-14", team: 2, saint: "Maria", name: "Trần Thị Ngọc Trâm", gender: "Nữ", term: "2023 - 2027", phone: "0937097859", uni: "Đại học Khoa học Tự nhiên", major: "Hóa học", scholarship: "Không", avatar: "" },
+            { id: "TV-02-15", team: 2, saint: "Anna", name: "Nguyễn Thị Kiều Trinh", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-02-16", team: 2, saint: "Maria", name: "Lê Thị Bảo Vy", gender: "Nữ", term: "2023 - 2027", phone: "0326479132", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-02-17", team: 2, saint: "", name: "Nguyễn Thị Như", gender: "Nữ", term: "", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị khách sạn", scholarship: "Không", avatar: "" },
+            { id: "TV-02-18", team: 2, saint: "", name: "Nguyễn Thiên Ân", gender: "Nam", term: "2025 - 2029", phone: "0866640937", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện điện tử", scholarship: "Không", avatar: "" },
+
+            // ĐỘI 3 - MATTHEU
+            { id: "TV-03-01", team: 3, saint: "Terexa", name: "Mai Nữ Thùy Duyên", gender: "Nữ", term: "2024 - 2027", phone: "0782473997", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-03-02", team: 3, saint: "Gioan", name: "Vũ Quốc Đạt", gender: "Nam", term: "2025 - 2029", phone: "0396620973", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không", avatar: "" },
+            { id: "TV-03-03", team: 3, saint: "Maria", name: "Trần Đỗ Nhân Hậu", gender: "Nữ", term: "2022 - 2027", phone: "0372445846", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
+            { id: "TV-03-04", team: 3, saint: "Maria", name: "Trần Ngọc Quỳnh Hương", gender: "Nữ", term: "2022 - 2026", phone: "0939249092", uni: "Đại học Công thương", major: "Công nghệ sinh học", scholarship: "Không", avatar: "" },
+            { id: "TV-03-05", team: 3, saint: "", name: "Phan Hoàng Mỹ", gender: "Nữ", term: "", phone: "0356553940", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không", avatar: "" },
+            { id: "TV-03-06", team: 3, saint: "Anna", name: "Trần Thị Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "0365383137", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-03-07", team: 3, saint: "Anna", name: "Trần Thị Ngọc (lớn)", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Có", avatar: "" },
+            { id: "TV-03-08", team: 3, saint: "Giuse", name: "Hồ Nguyễn Trường Pha", gender: "Nam", term: "2024 - 2028", phone: "0932193746", uni: "Đại học Hutech", major: "Quản trị doanh nghiệp", scholarship: "Không", avatar: "" },
+            { id: "TV-03-09", team: 3, saint: "Maria", name: "Lê Kim Phụng", gender: "Nữ", term: "2023 - 2027", phone: "0901316793", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không", avatar: "" },
+            { id: "TV-03-10", team: 3, saint: "Maria", name: "Nguyễn Thị Lệ Quyên", gender: "Nữ", term: "2025 - 2027", phone: "0944491425", uni: "Tôn Đức Thắng", major: "Khoa học môi trường", scholarship: "Không", avatar: "" },
+            { id: "TV-03-11", team: 3, saint: "Roco", name: "Thái Lê Hữu Tài", gender: "Nam", term: "2025 - 2030", phone: "0775806852", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-03-12", team: 3, saint: "Laurenso", name: "Trần Huy Thông", gender: "Nam", term: "2024 - 2028", phone: "0345441476", uni: "Tôn Đức Thắng", major: "Kỹ thuật cơ điện tử", scholarship: "Không", avatar: "" },
+            { id: "TV-03-13", team: 3, saint: "Maria", name: "Nguyễn Thu Thủy", gender: "Nữ", term: "2025 - 2029", phone: "0926368127", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không", avatar: "" },
+            { id: "TV-03-14", team: 3, saint: "Maria", name: "Phạm Phương Thúy", gender: "Nữ", term: "2022 - 2026", phone: "0328249581", uni: "Tôn Đức Thắng", major: "Kinh tế quốc tế", scholarship: "Có", avatar: "" },
+            { id: "TV-03-15", team: 3, saint: "Maria", name: "Đặng Thị Quỳnh Trang", gender: "Nữ", term: "2023 - 2026", phone: "0325654057", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-03-16", team: 3, saint: "", name: "Trần Huyền Trân", gender: "Nữ", term: "2022 - 2026", phone: "0523822797", uni: "Đại học Mở", major: "Tài chính ngân hàng", scholarship: "Không", avatar: "" },
+            { id: "TV-03-17", team: 3, saint: "Maria", name: "Phùng Thị Uyên", gender: "Nữ", term: "2025 - 2029", phone: "0353445871", uni: "Tôn Đức Thắng", major: "Quản trị chuỗi cung ứng", scholarship: "Không", avatar: "" },
+            { id: "TV-03-18", team: 3, saint: "G.Baotixia", name: "Đậu Quang Vũ", gender: "Nam", term: "2023 - 2027", phone: "0366136763", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện công nghiệp", scholarship: "Không", avatar: "" },
+            { id: "TV-03-19", team: 3, saint: "Maria", name: "Nguyễn Như Ý", gender: "Nữ", term: "2024 - 2029", phone: "0852032166", uni: "Tôn Đức Thắng", major: "Khoa học bảo hộ lao động", scholarship: "Không", avatar: "" },
+
+            // ĐỘI 4 - ANDRE
+            { id: "TV-04-01", team: 4, saint: "Giuse", name: "Phạm Tiến Dũng", gender: "Nam", term: "2025 - 2029", phone: "0385864092", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-04-02", team: 4, saint: "Maria", name: "Trà Thị Mỹ Duyên", gender: "Nữ", term: "2023 - 2027", phone: "0358137329", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không", avatar: "" },
+            { id: "TV-04-03", team: 4, saint: "Gioaan Bt", name: "Hà Tấn Hiệp", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không", avatar: "" },
+            { id: "TV-04-04", team: 4, saint: "Maria", name: "Hồ Thị Ngọc Lan", gender: "Nữ", term: "2025 - 2029", phone: "0364476423", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-04-05", team: 4, saint: "Giuse", name: "Nguyễn Phước Hoà Lâm", gender: "Nam", term: "2023 - 2027", phone: "0348319481", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
+            { id: "TV-04-06", team: 4, saint: "Maria", name: "Trần Như Mỹ", gender: "Nữ", term: "2023 - 2027", phone: "0969891762", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-04-07", team: 4, saint: "", name: "Nguyễn Trường Ngân", gender: "Nam", term: "2025 - 2029", phone: "0336093585", uni: "Đại học Bách Khoa", major: "Kỹ thuật hóa dầu", scholarship: "Không", avatar: "" },
+            { id: "TV-04-08", team: 4, saint: "Maria", name: "Nguyễn Lê Mỹ Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không", avatar: "" },
+            { id: "TV-04-09", team: 4, saint: "Maria", name: "Trần Thảo Nguyên", gender: "Nữ", term: "2022 - 2026", phone: "0823530750", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Có", avatar: "" },
+            { id: "TV-04-10", team: 4, saint: "", name: "Hoàng Thị Yến Nhi", gender: "Nữ", term: "2024 - 2027", phone: "0353985648", uni: "Tôn Đức Thắng", major: "Quản trị kinh doanh", scholarship: "Không", avatar: "" },
+            { id: "TV-04-11", team: 4, saint: "Maria", name: "Phan Thị Thúy Quỳnh", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-04-12", team: 4, saint: "Stephano", name: "Trương Duy Thiên", gender: "Nam", term: "2024 - 2028", phone: "0862100657", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không", avatar: "" },
+            { id: "TV-04-13", team: 4, saint: "Maria", name: "Trần Thanh Thúy", gender: "Nữ", term: "2023 - 2027", phone: "0819679031", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-04-14", team: 4, saint: "Anna", name: "Hồ Nguyễn Anh Thư", gender: "Nữ", term: "2022 - 2026", phone: "0368951509", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Không", avatar: "" },
+            { id: "TV-04-15", team: 4, saint: "Phero", name: "Phạm Minh Tiến", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Quan hệ lao động", scholarship: "Không", avatar: "" },
+            { id: "TV-04-16", team: 4, saint: "Maria", name: "Nguyễn Thị Bảo Trâm", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-04-17", team: 4, saint: "Maria", name: "Phạm Thảo Trâm", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị thương mại", scholarship: "Không", avatar: "" },
+            { id: "TV-04-18", team: 4, saint: "", name: "Nguyễn Minh Đăng", gender: "Nam", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không", avatar: "" },
+            { id: "TV-04-19", team: 4, saint: "Phêrô", name: "Nguyễn Hồng Ân", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật xây dựng dân dụng", scholarship: "Không", avatar: "" },
+
+            // ĐỘI 5 - SINAI
+            { id: "TV-05-01", team: 5, saint: "Phero", name: "Nguyễn Duy", gender: "Nam", term: "2023 - 2028", phone: "0966929572", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-05-02", team: 5, saint: "Vincente", name: "Vũ Đặng Khắc Duy", gender: "Nam", term: "2022 - 2026", phone: "0385081857", uni: "Đại học Khoa học Tự nhiên", major: "Công nghệ điện tử", scholarship: "Không", avatar: "" },
+            { id: "TV-05-03", team: 5, saint: "Gioan", name: "Liêng Hót Ha Brel", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Có", avatar: "" },
+            { id: "TV-05-04", team: 5, saint: "Giacobe", name: "Trần Giang Minh Hậu", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện", scholarship: "Không", avatar: "" },
+            { id: "TV-05-05", team: 5, saint: "Agata", name: "Lê Thị Thúy Kiều", gender: "Nữ", term: "2022 - 2026", phone: "0377900356", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-05-06", team: 5, saint: "Maria", name: "Nguyễn Thị Mỹ Lan", gender: "Nữ", term: "2024 - 2028", phone: "0347189800", uni: "Tôn Đức Thắng", major: "Quy hoạch vùng & đô thị", scholarship: "Không", avatar: "" },
+            { id: "TV-05-07", team: 5, saint: "Maria", name: "Hờ Thị Lề", gender: "Nữ", term: "2025 - 2029", phone: "0372827736", uni: "Tôn Đức Thắng", major: "Khoa học môi trường", scholarship: "Không", avatar: "" },
+            { id: "TV-05-08", team: 5, saint: "Anna", name: "Trần Hà My", gender: "Nữ", term: "2022 - 2026", phone: "0763962291", uni: "Tôn Đức Thắng", major: "Thiết kế thời trang", scholarship: "Không", avatar: "" },
+            { id: "TV-05-09", team: 5, saint: "Terexa", name: "Phạm Thị Như Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "0377262252", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-05-10", team: 5, saint: "Isave", name: "Nguyễn Thị Hạnh Nguyên", gender: "Nữ", term: "2025 - 2029", phone: "0369939546", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không", avatar: "" },
+            { id: "TV-05-11", team: 5, saint: "Maria", name: "Tô Thị Quỳnh Như", gender: "Nữ", term: "2023 - 2027", phone: "0946574452", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-05-12", team: 5, saint: "Anna", name: "Lê Hồng Thanh", gender: "Nữ", term: "2024 - 2027", phone: "0867663674", uni: "Đại học Sư phạm Kỹ thuật", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-05-13", team: 5, saint: "", name: "Đặng Phan Hoài Thịnh", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Công nghệ thông tin", scholarship: "Có", avatar: "" },
+            { id: "TV-05-14", team: 5, saint: "Anna", name: "Lê Thị Mỹ Trang", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không", avatar: "" },
+            { id: "TV-05-15", team: 5, saint: "Phaolo", name: "Đặng Quốc Trung", gender: "Nam", term: "2025 - 2029", phone: "0326727817", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện", scholarship: "Không", avatar: "" },
+            { id: "TV-05-16", team: 5, saint: "Dominic", name: "Lê Quang Vinh", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật điều khiển & tự động hóa", scholarship: "Không", avatar: "" },
+            { id: "TV-05-17", team: 5, saint: "Têrêsa", name: "Phùng Nhã Vy", gender: "Nữ", term: "", phone: "0815781252", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không", avatar: "" },
+            { id: "TV-05-18", team: 5, saint: "Maria", name: "Trần Ngọc Nhã Yên", gender: "Nữ", term: "2025 - 2029", phone: "0342869095", uni: "Tôn Đức Thắng", major: "Quy hoạch vùng & đô thị", scholarship: "Không", avatar: "" },
+            { id: "TV-05-19", team: 5, saint: "", name: "Nguyễn Văn Quang", gender: "Nam", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Điện tử công nghiệp", scholarship: "Không", avatar: "" },
+
+            // ĐỘI 6 - GOLGOTHA
+            { id: "TV-06-01", team: 6, saint: "Phaolo", name: "Trịnh Nguyễn Duy Anh", gender: "Nam", term: "2024 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật cơ điện tử", scholarship: "Không", avatar: "" },
+            { id: "TV-06-02", team: 6, saint: "Giuse", name: "Sùng Thanh Cao", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Quan hệ lao động", scholarship: "Có", avatar: "" },
+            { id: "TV-06-03", team: 6, saint: "Anna", name: "Phùng Linh Chi", gender: "Nữ", term: "2022 - 2026", phone: "0389634041", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-06-04", team: 6, saint: "Terexa", name: "Phạm Thị Thùy Dương", gender: "Nữ", term: "2023 - 2027", phone: "0849664996", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không", avatar: "" },
+            { id: "TV-06-05", team: 6, saint: "Anna", name: "Nguyễn Khả Hân", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không", avatar: "" },
+            { id: "TV-06-06", team: 6, saint: "Martino", name: "Nguyễn Đức Huy", gender: "Nam", term: "2021 - 2027", phone: "0931728670", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-06-07", team: 6, saint: "Terexa", name: "Phạm Thị Trúc Linh", gender: "Nữ", term: "2025 - 2029", phone: "0358237420", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
+            { id: "TV-06-08", team: 6, saint: "Cecilia", name: "Nguyễn Thị Trà My", gender: "Nữ", term: "2023 - 2026", phone: "0348104948", uni: "Đại học Mở", major: "Quản trị kinh doanh", scholarship: "Không", avatar: "" },
+            { id: "TV-06-09", team: 6, saint: "", name: "Nguyễn Thị Nhã Ngọc", gender: "Nữ", term: "2025 - 2028", phone: "0813096687", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Không", avatar: "" },
+            { id: "TV-06-10", team: 6, saint: "Terxa", name: "Nguyễn Trần Bảo Ngọc", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học môi trường", scholarship: "Không", avatar: "" },
+            { id: "TV-06-11", team: 6, saint: "Anna", name: "Phạm Yến Như", gender: "Nữ", term: "2023 - 2027", phone: "0868014307", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-06-12", team: 6, saint: "Giêrađô", name: "Tạ Thiên Phúc", gender: "Nam", term: "2024 - 2028", phone: "0896232835", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không", avatar: "" },
+            { id: "TV-06-13", team: 6, saint: "Catarina", name: "Lương Thị Thùy Trang", gender: "Nữ", term: "2025 - 2029", phone: "0949142509", uni: "Tôn Đức Thắng", major: "Dược học", scholarship: "Không", avatar: "" },
+            { id: "TV-06-14", team: 6, saint: "P.Xavie", name: "Nguyễn Quốc Trung", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện công nghiệp", scholarship: "Không", avatar: "" },
+            { id: "TV-06-15", team: 6, saint: "Maria", name: "Vũ Thị Ánh Tuyết", gender: "Nữ", term: "2025 - 2028", phone: "0347575643", uni: "Tôn Đức Thắng", major: "Quản trị kinh doanh", scholarship: "Không", avatar: "" },
+            { id: "TV-06-16", team: 6, saint: "", name: "Trần Thị Thanh Thúy", gender: "Nữ", term: "2024 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-06-17", team: 6, saint: "Têresa", name: "Trần Ái Mỹ", gender: "Nữ", term: "2025 - 2028", phone: "0914130331", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không", avatar: "" },
+            { id: "TV-06-18", team: 6, saint: "Maria", name: "Nguyễn Thị Thu Trang", gender: "Nữ", term: "2023 - 2027", phone: "0388539924", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Không", avatar: "" },
+
+            // ĐỘI 7 - CANA
+            { id: "TV-07-01", team: 7, saint: "Maria", name: "Lê Trí Bảo", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-07-02", team: 7, saint: "Anna", name: "Nguyễn Tiểu Hạ Duyên", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Luật học", scholarship: "Không", avatar: "" },
+            { id: "TV-07-03", team: 7, saint: "Maria", name: "Trần Thị Tuyết Hạnh", gender: "Nữ", term: "2025 - 2029", phone: "0379233454", uni: "Tôn Đức Thắng", major: "Kế toán tổng hợp", scholarship: "Không", avatar: "" },
+            { id: "TV-07-04", team: 7, saint: "Maria", name: "Đinh Nguyễn Phương Hồng", gender: "Nữ", term: "2022 - 2026", phone: "0868972230", uni: "Cao đẳng Công nghệ Sài Gòn", major: "Thiết kế đồ họa", scholarship: "Không", avatar: "" },
+            { id: "TV-07-05", team: 7, saint: "Terexa", name: "Hoàng Thị Thanh Huyền", gender: "Nữ", term: "2023 - 2027", phone: "0896535059", uni: "Tôn Đức Thắng", major: "Kiến trúc cảnh quan", scholarship: "Không", avatar: "" },
+            { id: "TV-07-06", team: 7, saint: "Terexa", name: "Phạm Thị Trúc Ly", gender: "Nữ", term: "2025 - 2029", phone: "0379986099", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
+            { id: "TV-07-07", team: 7, saint: "Giuse", name: "Nguyễn Minh Mẫn", gender: "Nam", term: "2023 - 2027", phone: "0912937028", uni: "Tôn Đức Thắng", major: "Kỹ thuật môi trường", scholarship: "Có", avatar: "" },
+            { id: "TV-07-08", team: 7, saint: "Maria", name: "Đỗ Thị Thanh Ngân", gender: "Nữ", term: "2023 - 2027", phone: "0787970529", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-07-09", team: 7, saint: "Maria", name: "Phạm Thị Quỳnh Như", gender: "Nữ", term: "2024 - 2028", phone: "0327649085", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không", avatar: "" },
+            { id: "TV-07-10", team: 7, saint: "Maria", name: "Lê Thị Ngọc Thảo", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không", avatar: "" },
+            { id: "TV-07-11", team: 7, saint: "M.Terexa", name: "Phan Quỳnh Thư", gender: "Nữ", term: "2023 - 2027", phone: "0336505100", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-07-12", team: 7, saint: "Phero", name: "Nguyễn Hoàng Đức Toàn", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không", avatar: "" },
+            { id: "TV-07-13", team: 7, saint: "Phero", name: "Nguyễn Hoàng Anh Tuấn", gender: "Nam", term: "2024 - 2028", phone: "0974705239", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện công nghiệp", scholarship: "Không", avatar: "" },
+            { id: "TV-07-14", team: 7, saint: "Cécilia", name: "Nguyễn Hồ Ngọc Tuyền", gender: "Nữ", term: "2023 - 2027", phone: "0346826031", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Có", avatar: "" },
+            { id: "TV-07-15", team: 7, saint: "Maria", name: "Lữ Thị Bảo Yến", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Không", avatar: "" },
+            { id: "TV-07-16", team: 7, saint: "Maria", name: "Hoàng Thị Tâm", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị kinh doanh", scholarship: "Không", avatar: "" },
+            { id: "TV-07-17", team: 7, saint: "Tô Ma", name: "Võ Duy Quang", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật xây dựng", scholarship: "Không", avatar: "" }
         ];
 
         const TEAMS_NAME_MAP = {
@@ -246,7 +375,7 @@
             4: "Đội 4 - Andre", 5: "Đội 5 - Sinai", 6: "Đội 6 - Golgotha", 7: "Đội 7 - Cana"
         };
 
-        // KHỞI TẠO TÀI KHOẢN MẬT KHẨU GỐC ĐỘNG
+        // ĐỒNG BỘ HÓA DATABASE HỆ THỐNG
         if (!localStorage.getItem("TT_Accounts_Database")) {
             const initialAccounts = {
                 "bandonghanh": { role: "admin", targetTeam: "all", label: "Ban Đồng Hành", pass: "bdh2527" },
@@ -259,8 +388,8 @@
                 "doi7": { role: "leader", targetTeam: 7, label: "Đội Trưởng Đội 7", pass: "doi72026" }
             };
             localStorage.setItem("TT_Accounts_Database", JSON.stringify(initialAccounts));
-                }
-                     if (!localStorage.getItem("TT_Timeline_Structure")) {
+        }
+        if (!localStorage.getItem("TT_Timeline_Structure")) {
             const defaultTimeline = {
                 "2025": ["Tháng 11", "Tháng 12"],
                 "2026": ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"]
@@ -278,7 +407,7 @@
         let tempAvatarBase64 = "";
         let isSystemLockedForLeader = false;
 
-        // KIỂM TRA KHÓA THỨ TƯ HÀNG TUẦN VÀ KHÓA THÁNG CŨ ĐỐI VỚI LEADER
+        // KIỂM TRA ĐIỀU KIỆN KHÓA CHỈNH SỬA TUẦN/THÁNG
         function checkRealtimeLockStatus() {
             const now = new Date();
             const dayOfWeek = now.getDay(); 
@@ -322,17 +451,44 @@
             }
         }
 
-        // ĐỒNG BỘ LOGO ĐẠI DIỆN WEB
-        function initAppLogo() {
+        // ĐỒNG BỘ HÌNH ẢNH BANNER VÀ LOGO APP ĐỘNG
+        function initAppBranding() {
             const savedLogo = localStorage.getItem("TT_App_Logo");
+            const savedCover = localStorage.getItem("TT_App_Cover");
             const defaultLogo = "https://placehold.co/150x150/2563eb/ffffff?text=TTTT";
+            const defaultCover = "https://placehold.co/800x400/1e40af/ffffff?text=Thăng+Tiến+Miền+Thành+Phố";
+
             document.getElementById("app-logo-login").src = savedLogo || defaultLogo;
             document.getElementById("app-logo-main").src = savedLogo || defaultLogo;
+            document.getElementById("app-cover-main").src = savedCover || defaultCover;
         }
-        window.onload = initAppLogo;
+        window.onload = initAppBranding;
 
+        // THAY ĐỔI ẢNH BÌA ĐỘNG (CHỈ QUYỀN ADMIN)
+        function triggerAppCoverUpload() {
+            if (currentUser && currentUser.role === 'admin') {
+                document.getElementById("app-cover-input").click();
+            }
+        }
+
+        function previewAppCover(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Str = e.target.result;
+                    localStorage.setItem("TT_App_Cover", base64Str);
+                    document.getElementById("app-cover-main").src = base64Str;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // THAY ĐỔI LOGO TRÒN ĐỘNG (CHỈ QUYỀN ADMIN)
         function triggerAppLogoUpload() {
-            if (currentUser && currentUser.role === 'admin') document.getElementById("app-logo-input").click();
+            if (currentUser && currentUser.role === 'admin') {
+                document.getElementById("app-logo-input").click();
+            }
         }
 
         function previewAppLogo(event) {
@@ -362,6 +518,7 @@
                 currentUser = { role: accountsDb[user].role, targetTeam: accountsDb[user].targetTeam, username: user, label: accountsDb[user].label };
                 document.getElementById("login-screen").style.display = "none";
                 document.getElementById("main-app").style.display = "flex";
+                
                 checkRealtimeLockStatus();
                 initTimelineSelectors();
                 setupInterfaceAccess();
@@ -375,18 +532,22 @@
             document.getElementById("main-app").style.display = "none";
             document.getElementById("login-screen").style.display = "flex";
         }
-                function setupInterfaceAccess() {
+
+        function setupInterfaceAccess() {
             const selector = document.getElementById("team-selector"); selector.innerHTML = "";
             const logoHoverText = document.getElementById("app-logo-hover-text");
+            const coverHoverText = document.getElementById("cover-hover-text");
             const securityNavBtn = document.getElementById("nav-btn-security");
 
             if (currentUser.role === "admin") {
                 document.getElementById("user-role-badge").innerText = currentUser.label;
-                document.getElementById("admin-time-btn").classList.remove("hidden"); securityNavBtn.classList.remove("hidden"); logoHoverText.classList.remove("hidden"); 
+                document.getElementById("admin-time-btn").classList.remove("hidden"); securityNavBtn.classList.remove("hidden"); 
+                logoHoverText.classList.remove("hidden"); coverHoverText.classList.remove("hidden"); 
                 for (let i = 1; i <= 7; i++) selector.innerHTML += `<option value="${i}">${TEAMS_NAME_MAP[i]}</option>`;
             } else {
                 document.getElementById("user-role-badge").innerText = currentUser.label;
-                document.getElementById("admin-time-btn").classList.add("hidden"); securityNavBtn.classList.add("hidden"); logoHoverText.classList.add("hidden"); 
+                document.getElementById("admin-time-btn").classList.add("hidden"); securityNavBtn.classList.add("hidden"); 
+                logoHoverText.classList.add("hidden"); coverHoverText.classList.add("hidden"); 
                 selector.innerHTML = `<option value="${currentUser.targetTeam}">${TEAMS_NAME_MAP[currentUser.targetTeam]}</option>`;
             }
             renderWeekTabs(); renderAttendanceTable(); renderRankingList(); renderMemberCards(); renderSecurityAccountsTable();
@@ -428,7 +589,7 @@
 
         function renderAttendanceTable() {
             checkRealtimeLockStatus();
-            const team = parseInt(document.getElementById("team-selector").value); document.getElementById("current-team-title").innerText = TEAMS_NAME_MAP[team];
+            const team = parseInt(document.getElementById("team-selector").value);
             const members = getActiveMembers().filter(m => m.team === team); const container = document.getElementById("attendance-rows-container"); container.innerHTML = "";
             const attDb = JSON.parse(localStorage.getItem("TT_Attendance")); const disDb = JSON.parse(localStorage.getItem("TT_Discipline"));
             const isDisabledStr = isSystemLockedForLeader ? "disabled" : "";
@@ -447,8 +608,8 @@
                             <img src="${m.avatar || 'https://placehold.co/40x40/e2e8f0/64748b?text=?'}" class="w-7 h-7 rounded-full object-cover">
                             <div><div class="text-[9px] font-semibold text-gray-400 leading-none">${m.saint || ''}</div><div class="text-xs font-bold text-gray-800 mt-0.5">${m.name}</div></div>
                         </td>
-                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveAtt('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-xs font-bold rounded-lg p-1"><option value="X" ${cA === 'X' ? 'selected' : ''}>X (Có)</option><option value="K" ${cA === 'K' ? 'selected' : ''}>K (Vắng)</option><option value="P" ${cA === 'P' ? 'selected' : ''}>P (Phép)</option></select></td>
-                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveDis('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-[10px] font-medium rounded-lg p-1"><option value="0" ${cD == 0 ? 'selected' : ''}>Chuẩn</option><option value="1" ${cD == 1 ? 'selected' : ''}>Áo/Khăn (-5)</option><option value="2" ${cD == 2 ? 'selected' : ''}>Trễ/Vi phạm (-10)</option></select></td>
+                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveAtt('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-xs font-bold rounded-lg p-1 focus:outline-none"><option value="X" ${cA === 'X' ? 'selected' : ''}>X (Có)</option><option value="K" ${cA === 'K' ? 'selected' : ''}>K (Vắng)</option><option value="P" ${cA === 'P' ? 'selected' : ''}>P (Phép)</option></select></td>
+                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveDis('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-[10px] font-medium rounded-lg p-1 focus:outline-none"><option value="0" ${cD == 0 ? 'selected' : ''}>Chuẩn</option><option value="1" ${cD == 1 ? 'selected' : ''}>Áo/Khăn (-5)</option><option value="2" ${cD == 2 ? 'selected' : ''}>Trễ/Vi phạm (-10)</option></select></td>
                         <td class="py-3.5 px-4 text-right font-bold text-xs ${score < 80 ? 'text-red-600' : 'text-green-600'}">${score}đ</td>
                     </tr>`;
             });
@@ -548,17 +709,33 @@
             localStorage.setItem("TT_Accounts_Database", JSON.stringify(accountsDb)); alert(`Đã cập nhật mật khẩu mới cho [ ${usernameKey} ]!`); renderSecurityAccountsTable();
         }
 
+        // CHỨC NĂNG XUẤT EXCEL (CSV) ĐÃ ĐƯỢC LÀM RÕ RÀNG TIẾNG VIỆT 100%, KHÔNG CÒN KÝ TỰ LẠ
         function exportToCSV() {
             const attDb = JSON.parse(localStorage.getItem("TT_Attendance")); const disDb = JSON.parse(localStorage.getItem("TT_Discipline")); const members = getActiveMembers();
-            let csvContent = "\uFEFF"; csvContent += "Năm,Tháng,Đội,Mã số,Tên Thánh,Họ Tên,Tuần 1 DD,Tuần 1 VP,Tuần 2 DD,Tuần 2 VP,Tuần 3 DD,Tuần 3 VP,Tuần 4 DD,Tuần 4 VP,Tổng điểm Tháng\n";
+            
+            let csvContent = "\uFEFF"; 
+            csvContent += "Năm,Tháng,Đội,Mã số,Tên Thánh,Họ Tên,Tuần 1 Điểm Danh,Tuần 1 Tác Phong,Tuần 2 Điểm Danh,Tuần 2 Tác Phong,Tuần 3 Điểm Danh,Tuần 3 Tác Phong,Tuần 4 Điểm Danh,Tuần 4 Tác Phong,Tổng điểm chu kỳ\n";
+            
             members.forEach(m => {
                 let score = 100; let weeksData = [];
                 for(let w = 1; w <= 4; w++) {
-                    const aV = attDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || "X"; const dV = disDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || 0;
-                    if (aV === "K") score -= 10; else if (aV === "P") score -= 2; score -= (parseInt(dV) * 5); weeksData.push(aV, dV);
+                    const rawAtt = attDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || "X"; 
+                    const rawDis = disDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || 0;
+                    
+                    // Chuyển mã ký tự phức tạp thành chữ tiếng Việt dễ đọc
+                    let attVietnamese = "Có mặt";
+                    if (rawAtt === "K") { attVietnamese = "Vắng không phép"; score -= 10; }
+                    else if (rawAtt === "P") { attVietnamese = "Vắng có phép"; score -= 2; }
+                    
+                    let disVietnamese = "Chuẩn tác phong";
+                    if (rawDis == 1) { disVietnamese = "Lỗi trang phục (-5)"; score -= 5; }
+                    else if (rawDis == 2) { disVietnamese = "Đi trễ / Vi phạm (-10)"; score -= 10; }
+
+                    weeksData.push(`"${attVietnamese}"`, `"${disVietnamese}"`);
                 }
-                csvContent += `${currentYear},${currentMonth},"${TEAMS_NAME_MAP[m.team]}",${m.id},"${m.saint || ''}","${m.name}",${weeksData.join(',')},${score}\n`;
+                csvContent += `${currentYear},${currentMonth},"${TEAMS_NAME_MAP[m.team]}",${m.id},"${m.saint || ''}","${m.name}",${weeksData.join(',')},${score}đ\n`;
             });
+
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.setAttribute("download", `BaoCao_ThiDua_${currentMonth.replace(' ', '')}_Nam_${currentYear}.csv`); document.body.appendChild(link); link.click(); document.body.removeChild(link);
         }
 
@@ -574,4 +751,3 @@
     </script>
 </body>
 </html>
-
