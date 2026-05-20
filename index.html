@@ -2,104 +2,102 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Thiện Nguyện Thăng Tiến - Quản Lý Nội Bộ</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Thăng Tiến">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiện Nguyện Thăng Tiến - TP</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased no-scrollbar">
-    <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center px-6 py-12">
+<body class="bg-gray-50/50 text-gray-800 min-h-screen flex flex-col items-center antialiased">
+
+    <div id="login-screen" class="min-h-screen flex flex-col items-center justify-center px-6 py-12 relative z-50 w-full">
         <div class="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-gray-100 flex flex-col items-center">
-            <div class="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center text-white font-black text-xl tracking-wider shadow-lg mb-4 border-4 border-blue-100">
-                TTTT
+            <div class="relative mb-4">
+                <img id="app-logo-login" src="https://placehold.co/150x150/2563eb/ffffff?text=TTTT" class="w-24 h-24 rounded-full object-cover border-4 border-blue-100 shadow-lg">
             </div>
-            <h1 class="text-xl font-bold text-gray-900 tracking-tight text-center">Thiện Nguyện Thăng Tiến</h1>
+            <h1 class="text-xl font-bold text-gray-900 tracking-tight text-center">Thiện Nguyện Thăng Tiến - TP</h1>
             <p class="text-sm text-gray-500 mt-1 mb-8 text-center">Hệ thống điểm danh & thi đua trực quan</p>
             
             <div class="w-full space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Tài khoản</label>
-                    <input type="text" id="username" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition">
+                    <input type="text" id="username" placeholder="Nhập tài khoản..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Mật khẩu</label>
-                    <input type="password" id="password" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition">
+                    <input type="password" id="password" placeholder="••••••••" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition">
                 </div>
                 <button onclick="handleLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-xl mt-2 shadow-md transition text-sm">
                     Đăng Nhập
                 </button>
             </div>
-
-            <div class="w-full mt-8 pt-6 border-t border-gray-100">
-                <span class="text-xs font-medium text-gray-400 block mb-2">Đăng nhập nhanh kiểm thử:</span>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                    <button onclick="quickLogin('bandonghanh', 'bdh2026')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-3 rounded-lg text-left transition">🔑 Ban Đồng Hành</button>
-                    <button onclick="quickLogin('doitruong1', 'doi12026')" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-3 rounded-lg text-left transition">🛡️ Đội 1 (Galilea)</button>
-                </div>
-            </div>
         </div>
     </div>
-        <div id="main-app" class="hidden min-h-screen flex flex-col pb-24">
-        <header class="bg-white border-b border-gray-200 sticky top-0 z-40 px-4 py-3 flex items-center justify-between shadow-sm">
-            <div class="flex items-center space-x-3">
-                <div class="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center text-white text-[10px] font-black">TT</div>
-                <div>
-                    <h2 class="text-sm font-bold text-gray-900" id="user-display-role">Ban Đồng Hành</h2>
-                    <p class="text-[10px] text-gray-500" id="user-display-scope">Toàn quyền hệ thống</p>
+        <div id="main-app" style="display: none;" class="min-h-screen flex flex-col pb-24 w-full max-w-md bg-gray-50 shadow-2xl relative">
+        <header class="bg-gradient-to-b from-blue-700 to-blue-600 text-white px-5 pt-7 pb-16 rounded-b-[2.5rem] shadow-md sticky top-0 z-30">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div id="app-logo-container" class="relative cursor-pointer group" onclick="triggerAppLogoUpload()">
+                        <img id="app-logo-main" src="" class="w-11 h-11 rounded-xl object-cover border border-white/20 shadow-inner">
+                        <input type="file" id="app-logo-input" class="hidden" accept="image/*" onchange="previewAppLogo(event)">
+                        <div id="app-logo-hover-text" class="absolute inset-0 bg-black/40 rounded-xl items-center justify-center text-[8px] font-bold hidden">ĐỔI</div>
+                    </div>
+                    <div>
+                        <h2 class="text-sm font-black tracking-tight">Thiện Nguyện Thăng Tiến - TP</h2>
+                        <p id="user-role-badge" class="text-[10px] text-blue-100 font-medium bg-blue-800/50 px-2 py-0.5 rounded-full inline-block mt-0.5 border border-blue-400/20">Đội Trưởng</p>
+                    </div>
                 </div>
+                <button onclick="handleLogout()" class="p-2.5 bg-white/10 hover:bg-white/20 rounded-xl transition text-blue-100 hover:text-white backdrop-blur-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path></svg>
+                </button>
             </div>
-            <button onclick="handleLogout()" class="p-2 text-gray-400 hover:text-red-500 transition">
-                <i data-lucide="log-out" class="w-5 h-5"></i>
-            </button>
         </header>
 
-        <main class="flex-1 max-w-7xl w-full mx-auto p-4 space-y-4">
-            
-            <div id="admin-filter-box" class="bg-white p-4 rounded-2xl border border-gray-200 shadow-sm space-y-2">
-                <label class="block text-xs font-bold text-gray-600 uppercase tracking-wider">Chọn phân khu quản lý Đội:</label>
-                <select id="team-selector" onchange="renderAttendanceTable()" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="1">ĐỘI 1 - GALILEA</option>
-                    <option value="2">ĐỘI 2 - NAZARETH</option>
-                    <option value="3">ĐỘI 3 - MATTHEU</option>
-                    <option value="4">ĐỘI 4 - ANDRE</option>
-                    <option value="5">ĐỘI 5 - SINAI</option>
-                    <option value="6">ĐỘI 6 - GOLGOTHA</option>
-                    <option value="7">ĐỘI 7 - CANA</option>
-                </select>
-            </div>
-                <div id="tab-content-attendance" class="space-y-4">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-base font-bold text-gray-900" id="current-team-title">Đội 1 - Galilea</h3>
-                        <p class="text-xs text-gray-500">Điểm danh & Tác phong kỷ luật tuần</p>
-                    </div>
-                    <button onclick="openTimeManager()" class="flex items-center space-x-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1.5 rounded-xl text-xs font-medium transition">
-                        <i data-lucide="calendar" class="w-3.5 h-3.5"></i>
-                        <span>Thêm Tháng/Tuần</span>
-                    </button>
+        <main class="px-4 -mt-10 flex-1 z-40 space-y-4">
+            <div id="lock-banner" class="hidden w-full bg-amber-50 border border-amber-200 rounded-2xl p-3 flex items-start space-x-2.5 shadow-sm">
+                <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"></path></svg>
+                <div>
+                    <h4 id="lock-banner-title" class="text-xs font-bold text-amber-800">Hệ thống đang khóa chỉnh sửa</h4>
+                    <p id="lock-banner-desc" class="text-[10px] text-amber-600 mt-0.5">Quyền hạn chỉnh sửa đã bị đóng.</p>
                 </div>
+            </div>
 
-                <div class="flex items-center space-x-2 bg-white p-2 rounded-xl border border-gray-200 shadow-sm overflow-x-auto no-scrollbar" id="time-columns-tab"></div>
-
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-                    <div class="overflow-x-auto">
+            <div class="flex flex-col space-y-3 bg-white p-3 rounded-xl border border-gray-200 shadow-sm w-full">
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-0.5">Chọn Năm:</label>
+                        <select id="year-selector" onchange="handleYearChange()" class="w-full bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg px-2 py-2 focus:ring-2 focus:ring-blue-500 shadow-sm"></select>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-gray-400 uppercase mb-0.5">Chọn Tháng:</label>
+                        <select id="month-selector" onchange="handleMonthChange()" class="w-full bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg px-2 py-2 focus:ring-2 focus:ring-blue-500 shadow-sm"></select>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-1 border-t border-gray-100 pt-2" id="week-tabs-container"></div>
+            </div>
+                        <div id="tab-content-attendance" class="space-y-4">
+                <div class="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-gray-100 flex items-center justify-between bg-gray-50/70">
+                        <div>
+                            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider">Phân khu quản lý</span>
+                            <h3 id="current-team-title" class="text-base font-black text-gray-800 -mt-0.5">---</h3>
+                        </div>
+                        <select id="team-selector" onchange="handleTeamChange()" class="bg-white border border-gray-200 text-xs font-bold rounded-xl px-3 py-2 shadow-sm focus:ring-2 focus:ring-blue-500"></select>
+                    </div>
+                    <div class="overflow-x-auto hide-scrollbar">
                         <table class="w-full text-left border-collapse">
                             <thead>
-                                <tr class="bg-gray-50 border-b border-gray-200 text-[11px] font-bold text-gray-500 uppercase tracking-wider">
-                                    <th class="py-3 px-4 sticky left-0 bg-gray-50 z-10 w-48">Thành Viên</th>
-                                    <th class="py-3 px-3 text-center">Trạng Thái</th>
-                                    <th class="py-3 px-3 text-center">Vi Phạm Kỷ Luật</th>
-                                    <th class="py-3 px-4 text-right">Tổng Điểm</th>
+                                <tr class="border-b border-gray-100 text-[10px] font-bold text-gray-400 uppercase tracking-wider bg-gray-50/30">
+                                    <th class="py-3 px-4 sticky left-0 bg-white z-10">Thành viên</th>
+                                    <th class="py-3 px-2 text-center">Điểm danh</th>
+                                    <th class="py-3 px-2 text-center">Tác phong</th>
+                                    <th class="py-3 px-4 text-right">Tổng Tháng</th>
                                 </tr>
                             </thead>
                             <tbody id="attendance-rows-container" class="divide-y divide-gray-100 text-sm"></tbody>
@@ -109,513 +107,471 @@
             </div>
 
             <div id="tab-content-ranking" class="hidden space-y-4">
-                <div>
-                    <h3 class="text-base font-bold text-gray-900">Bảng Tổng Sắp Thi Đua Toàn Nhóm</h3>
-                    <p class="text-xs text-gray-500">Báo cáo trực quan thứ hạng tích lũy tự động từ 7 Đội</p>
-                </div>
-                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
-                    <div class="p-4 bg-gray-50 border-b border-gray-200 flex justify-between text-xs font-bold text-gray-500">
-                        <span>THỨ HẠNG / ĐỘI</span>
-                        <span>ĐIỂM THI ĐUA ĐỘI KHÁI QUÁT</span>
+                <div class="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/70">
+                        <div>
+                            <span class="text-[10px] font-bold text-orange-600 uppercase tracking-wider">Bảng tổng sắp thi đua</span>
+                            <h3 id="ranking-title-text" class="text-base font-black text-gray-800 -mt-0.5">---</h3>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <button onclick="exportToCSV()" class="px-2.5 py-1.5 bg-green-50 hover:bg-green-100 text-green-600 text-xs font-bold rounded-lg transition flex items-center space-x-1 shadow-sm">
+                                <span>Xuất Excel</span>
+                            </button>
+                            <button id="admin-time-btn" onclick="openTimeManager()" class="hidden px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-bold rounded-lg transition shadow-sm">Thêm Tháng</button>
+                        </div>
                     </div>
                     <div id="ranking-list-container" class="divide-y divide-gray-100"></div>
                 </div>
             </div>
 
             <div id="tab-content-members" class="hidden space-y-4">
-                <div>
-                    <h3 class="text-base font-bold text-gray-900">Thông Tin Nhân Sự Đội</h3>
-                    <p class="text-xs text-gray-500">Hồ sơ lý lịch chi tiết các thành viên</p>
+                <div class="px-1">
+                    <h3 class="text-base font-black text-gray-800">Thông Tin Lý Lịch</h3>
+                    <p class="text-xs text-gray-400">Danh sách thành viên chính thức của đội</p>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="member-cards-container"></div>
+                <div id="member-cards-container" class="space-y-3"></div>
             </div>
 
-        </main>
-
-        <div id="time-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-            <div class="bg-white w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl">
-                <h4 class="text-base font-bold text-gray-900">Quản Lý Cột Mốc Thời Gian</h4>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tên Nhãn (Ví dụ: Tuần 1 - T5/2026)</label>
-                    <input type="text" id="new-time-label" placeholder="Nhập mốc thời gian..." class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div id="tab-content-security" class="hidden space-y-4">
+                <div class="px-1">
+                    <h3 class="text-base font-black text-gray-800">Cập Nhật Mật Khẩu</h3>
+                    <p class="text-xs text-gray-400">Quản lý cấp lại bảo mật cho Ban Đồng Hành và Ban Chỉ Huy Đội</p>
                 </div>
-                <div class="flex space-x-2 justify-end">
-                    <button onclick="closeTimeManager()" class="px-4 py-2 text-xs font-medium text-gray-500 hover:bg-gray-100 rounded-xl transition">Hủy</button>
-                    <button onclick="addNewTimeColumn()" class="px-4 py-2 text-xs font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition">Thêm Cột</button>
+                <div class="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-4 space-y-3">
+                    <div class="overflow-x-auto hide-scrollbar">
+                        <table class="w-full text-left text-xs">
+                            <thead>
+                                <tr class="text-gray-400 border-b border-gray-100 pb-2 uppercase font-bold text-[10px]">
+                                    <th class="pb-2">Tài khoản</th>
+                                    <th class="pb-2">Quyền hạn</th>
+                                    <th class="pb-2 w-32">Mật khẩu mới</th>
+                                    <th class="pb-2 text-right">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="security-accounts-table" class="divide-y divide-gray-100"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+                    <nav class="fixed bottom-0 w-full max-w-md bg-white/95 backdrop-blur-md border-t border-gray-200/80 px-4 py-3 flex justify-around items-center shadow-[0_-5px_20px_rgba(0,0,0,0.03)] z-50 rounded-t-3xl">
+            <button id="nav-btn-attendance" onclick="switchTab('attendance')" class="flex flex-col items-center space-y-1 text-blue-600 font-bold transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span class="text-[10px] tracking-tight">Điểm Danh</span>
+            </button>
+            <button id="nav-btn-ranking" onclick="switchTab('ranking')" class="flex flex-col items-center space-y-1 text-gray-400 font-medium transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                <span class="text-[10px] tracking-tight">Thi Đua</span>
+            </button>
+            <button id="nav-btn-members" onclick="switchTab('members')" class="flex flex-col items-center space-y-1 text-gray-400 font-medium transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <span class="text-[10px] tracking-tight">Thành Viên</span>
+            </button>
+            <button id="nav-btn-security" onclick="switchTab('security')" class="hidden flex flex-col items-center space-y-1 text-gray-400 font-medium transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span class="text-[10px] tracking-tight">Bảo Mật</span>
+            </button>
+        </nav>
+
+        <div id="time-modal" class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 border border-gray-100">
+                <h3 class="text-base font-black text-gray-900 mb-1">Thêm Tháng Mới</h3>
+                <p class="text-xs text-gray-400 mb-4">Tạo chu kỳ thi đua 4 tuần chuẩn cho năm hiện tại.</p>
+                <div class="mb-5">
+                    <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Tên Tháng (Ví dụ: Tháng 6)</label>
+                    <input type="text" id="new-time-label" placeholder="Ví dụ: Tháng 6..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none">
+                </div>
+                <div class="flex space-x-3 text-sm font-semibold">
+                    <button onclick="closeTimeManager()" class="flex-1 py-2.5 bg-gray-100 text-gray-600 rounded-xl">Hủy</button>
+                    <button onclick="addNewMonth()" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl shadow-md">Tạo mới</button>
                 </div>
             </div>
         </div>
 
-        <nav class="bg-white/90 backdrop-blur-md border-t border-gray-200 fixed bottom-0 left-0 right-0 z-40 px-4 py-2 flex justify-around shadow-lg">
-            <button onclick="switchTab('attendance')" id="nav-btn-attendance" class="flex flex-col items-center space-y-0.5 text-blue-600 font-bold transition">
-                <i data-lucide="check-square" class="w-5 h-5"></i>
-                <span class="text-[10px]">Điểm Danh</span>
-            </button>
-            <button onclick="switchTab('ranking')" id="nav-btn-ranking" class="flex flex-col items-center space-y-0.5 text-gray-400 font-medium transition">
-                <i data-lucide="trophy" class="w-5 h-5"></i>
-                <span class="text-[10px]">Thi Đua</span>
-            </button>
-            <button onclick="switchTab('members')" id="nav-btn-members" class="flex flex-col items-center space-y-0.5 text-gray-400 font-medium transition">
-                <i data-lucide="users" class="w-5 h-5"></i>
-                <span class="text-[10px]">Nhân Sự</span>
-            </button>
-        </nav>
+        <div id="member-edit-modal" class="hidden fixed inset-0 bg-gray-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+            <div class="bg-white w-full max-w-sm rounded-3xl shadow-2xl p-6 border border-gray-100 my-auto">
+                <h3 class="text-base font-black text-gray-900 mb-1">Chỉnh Sửa Hồ Sơ</h3>
+                <p class="text-xs text-gray-400 mb-4">Cập nhật thông tin chi tiết và tải ảnh chân dung thành viên.</p>
+                <input type="hidden" id="edit-mem-id">
+                <div class="space-y-3 text-xs max-h-[50vh] overflow-y-auto px-1 hide-scrollbar">
+                    <div class="flex flex-col items-center mb-2">
+                        <img id="edit-mem-avatar-preview" src="https://placehold.co/100x100/e2e8f0/64748b?text=Avatar" class="w-20 h-20 rounded-full object-cover border border-gray-200 shadow-sm">
+                        <input type="file" id="edit-mem-avatar-input" class="hidden" accept="image/*" onchange="previewMemberAvatar(event)">
+                        <button type="button" onclick="document.getElementById('edit-mem-avatar-input').click()" class="mt-1.5 text-blue-600 font-bold text-[11px]">Tải ảnh từ máy</button>
+                    </div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Tên Thánh</label><input type="text" id="edit-mem-saint" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Họ và Tên</label><input type="text" id="edit-mem-name" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Trường Học</label><input type="text" id="edit-mem-uni" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Chuyên Ngành</label><input type="text" id="edit-mem-major" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Niên Khóa</label><input type="text" id="edit-mem-term" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                    <div><label class="block font-bold text-gray-500 uppercase mb-1">Số Điện Thoại</label><input type="text" id="edit-mem-phone" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm"></div>
+                </div>
+                <div class="flex space-x-3 text-sm font-semibold mt-5">
+                    <button onclick="closeMemberEditor()" class="flex-1 py-2.5 bg-gray-100 text-gray-600 rounded-xl">Hủy</button>
+                    <button onclick="saveMemberData()" class="flex-1 py-2.5 bg-blue-600 text-white rounded-xl shadow-md">Lưu Hồ Sơ</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Kho dữ liệu 126 thành viên Thăng Tiến
-        const SOURCE_MEMBERS_DATA = [
+                // KHO DỮ LIỆU GỐC THÀNH VIÊN
+        const STATIC_MEMBERS_DATA = [
             // ĐỘI 1
-            { id: "TV-01-01", team: 1, saint: "Maria", name: "Huỳnh Khả Ái", gender: "Nữ", term: "2024 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-01-02", team: 1, saint: "", name: "Phạm Châm Anh", gender: "Nữ", term: "Chưa cập nhật", phone: "0941939211", uni: "Tôn Đức Thắng", major: "Quản trị", scholarship: "Không" },
-            { id: "TV-01-03", team: 1, saint: "Anna", name: "Trương Hồng Ân", gender: "Nữ", term: "2024 - 2026", phone: "0899780934", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không" },
-            { id: "TV-01-04", team: 1, saint: "Terexa", name: "Nguyễn Hồng Thiên Ân", gender: "Nữ", term: "2023 - 2026", phone: "0565298277", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không" },
-            { id: "TV-01-05", team: 1, saint: "", name: "Võ Hoàng Minh Chiến", gender: "Nam", term: "2025 - 2029", phone: "0358674917", uni: "Tôn Đức Thắng", major: "Kỹ thuật", scholarship: "Có" },
-            { id: "TV-01-06", team: 1, saint: "", name: "Thạch Thái Hà", gender: "Nam", term: "2024 - 2028", phone: "0385862705", uni: "Tôn Đức Thắng", major: "Công nghệ thông tin", scholarship: "Không" },
-            { id: "TV-01-07", team: 1, saint: "Maria", name: "Nguyễn Thị Phương Linh", gender: "Nữ", term: "2023 - 2027", phone: "0344512714", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-01-08", team: 1, saint: "", name: "Y LySa", gender: "Nữ", term: "2023 - 2027", phone: "0393351742", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không" },
-            { id: "TV-01-09", team: 1, saint: "Anna", name: "Nguyễn Thị Thu Ngân", gender: "Nữ", term: "2022 - 2026", phone: "0965354660", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Có" },
-            { id: "TV-01-10", team: 1, saint: "Madalena", name: "Nguyễn Thị Trúc Nhi", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính", scholarship: "Không" },
-            { id: "TV-01-11", team: 1, saint: "Maria", name: "Trần Khánh Phương", gender: "Nữ", term: "2025 - 2027", phone: "0344735653", uni: "Tôn Đức Thắng", major: "Du lịch", scholarship: "Không" },
-            { id: "TV-01-12", team: 1, saint: "Terexa", name: "Nguyễn Thị Ngọc Phượng", gender: "Nữ", term: "2023 - 2027", phone: "0868454167", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không" },
-            { id: "TV-01-13", team: 1, saint: "", name: "Vương Phúc Sang", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Môi trường", scholarship: "Không" },
-            { id: "TV-01-14", team: 1, saint: "", name: "Trương Sơn Tùng", gender: "Nam", term: "2023 - 2027", phone: "0944456521", uni: "Tôn Đức Thắng", major: "Điện tử", scholarship: "Không" },
-            { id: "TV-01-15", team: 1, saint: "Monica", name: "Nguyễn Thị Ngọc Hân", gender: "Nữ", term: "2025 - 2028", phone: "0355010800", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Không" },
-            { id: "TV-01-16", team: 1, saint: "Anna", name: "Lâm Nguyễn Anh Thư", gender: "Nữ", term: "2025 - 2029", phone: "0813060959", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-01-17", team: 1, saint: "", name: "Ngọc Duyên", gender: "Nữ", term: "Chưa rõ", phone: "0901603723", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không" },
-            { id: "TV-01-18", team: 1, saint: "Maria", name: "Phạm Ngọc Lan Chi", gender: "Nữ", term: "Chưa rõ", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không" },
-
-            // ĐỘI 2
-            { id: "TV-02-01", team: 2, saint: "Anna", name: "Nguyễn Hoàng Mỹ Duyên", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Đại Học Sài Gòn", major: "Sư phạm", scholarship: "Không" },
-            { id: "TV-02-02", team: 2, saint: "Phanxico", name: "Đặng Quỳnh Đoan", gender: "Nam", term: "2025 - 2028", phone: "0396676013", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-02-03", team: 2, saint: "Anna", name: "La Diễm Hương", gender: "Nữ", term: "2023 - 2027", phone: "0866727493", uni: "Mở TP.HCM", major: "Kinh tế", scholarship: "Không" },
-            { id: "TV-02-04", team: 2, saint: "Micae", name: "Nguyễn Hữu Khang", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "IT", scholarship: "Không" },
-            { id: "TV-02-05", team: 2, saint: "Phero", name: "Đỗ Quang Linh", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Mỹ thuật", scholarship: "Có" },
-            { id: "TV-02-06", team: 2, saint: "", name: "Trần Gia Mỹ", gender: "Nữ", term: "2022 - 2026", phone: "0378202400", uni: "Ngoại Thương", major: "Logistics", scholarship: "Không" },
-            { id: "TV-02-07", team: 2, saint: "Giuse", name: "Hồ Khánh Nam", gender: "Nam", term: "2025 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Xây dựng", scholarship: "Không" },
-            { id: "TV-02-08", team: 2, saint: "", name: "Lê Thị Kim Ngân", gender: "Nữ", term: "2022 - 2026", phone: "0366967259", uni: "Kinh Tế Luật", major: "Luật thương mại", scholarship: "Không" },
-            { id: "TV-02-09", team: 2, saint: "Maria", name: "Nguyễn Thị Thanh Nhi", gender: "Nữ", term: "2023 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Dược", scholarship: "Không" },
-            { id: "TV-02-10", team: 2, saint: "Phero", name: "Nguyễn Bảo Quốc", gender: "Nam", term: "2025 - 2028", phone: "0867855462", uni: "Bách Khoa", major: "Cơ khí", scholarship: "Không" },
-            { id: "TV-02-11", team: 2, saint: "Anê", name: "Ntơr K' Riêm", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Công tác xã hội", scholarship: "Có" },
-            { id: "TV-02-12", team: 2, saint: "Matta", name: "Đinh Lê Hồng Thuỷ", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Y Dược", major: "Điều dưỡng", scholarship: "Không" },
-            { id: "TV-02-13", team: 2, saint: "Terexa", name: "Nguyễn Hoài Trang Thương", gender: "Nữ", term: "2025 - 2030", phone: "0794345483", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-02-14", team: 2, saint: "Maria", name: "Trần Thị Ngọc Trâm", gender: "Nữ", term: "2023 - 2027", phone: "0937097859", uni: "Khoa Học Tự Nhiên", major: "Hóa học", scholarship: "Không" },
-            { id: "TV-02-15", team: 2, saint: "Anna", name: "Nguyễn Thị Kiều Trinh", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-02-16", team: 2, saint: "Maria", name: "Lê Thị Bảo Vy", gender: "Nữ", term: "2023 - 2027", phone: "0326479132", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-02-17", team: 2, saint: "", name: "Nguyễn Thị Như", gender: "Nữ", term: "Chưa rõ", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị khách sạn", scholarship: "Không" },
-            { id: "TV-02-18", team: 2, saint: "", name: "Nguyễn Thiên Ân", gender: "Nam", term: "2025 - 2029", phone: "866640937", uni: "Tôn Đức Thắng", major: "Điện điện tử", scholarship: "Không" },
-            // ĐỘI 3
-            { id: "TV-03-01", team: 3, saint: "Terexa", name: "Mai Nữ Thùy Duyên", gender: "Nữ", term: "2024 - 2027", phone: "0782473997", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-03-02", team: 3, saint: "Gioan", name: "Vũ Quốc Đạt", gender: "Nam", term: "2025 - 2029", phone: "0396620973", uni: "Tôn Đức Thắng", major: "IT", scholarship: "Không" },
-            { id: "TV-03-03", team: 3, saint: "Maria", name: "Trần Đỗ Nhân Hậu", gender: "Nữ", term: "2022 - 2027", phone: "0372445846", uni: "Tôn Đức Thắng", major: "Nội thất", scholarship: "Không" },
-            { id: "TV-03-04", team: 3, saint: "Maria", name: "Trần Ngọc Quỳnh Hương", gender: "Nữ", term: "2022 - 2026", phone: "0939249092", uni: "Công Nghệ Thực Phẩm", major: "Công nghệ sinh học", scholarship: "Không" },
-            { id: "TV-03-05", team: 3, saint: "", name: "Phan Hoàng Mỹ", gender: "Nữ", term: "Chưa rõ", phone: "0356553940", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không" },
-            { id: "TV-03-06", team: 3, saint: "Anna", name: "Trần Thị Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "0365383137", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-03-07", team: 3, saint: "Anna", name: "Trần Thị Ngọc (lớn)", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính", scholarship: "Có" },
-            { id: "TV-03-08", team: 3, saint: "Giuse", name: "Hồ Nguyễn Trường Pha", gender: "Nam", term: "2024 - 2028", phone: "0932193746", uni: "Hutech", major: "Quản trị doanh nghiệp", scholarship: "Không" },
-            { id: "TV-03-09", team: 3, saint: "Maria", name: "Lê Kim Phụng", gender: "Nữ", term: "2023 - 2027", phone: "0901316793", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không" },
-            { id: "TV-03-10", team: 3, saint: "Maria", name: "Nguyễn Thị Lệ Quyên", gender: "Nữ", term: "2025 - 2027", phone: "0944491425", uni: "Tôn Đức Thắng", major: "Môi trường", scholarship: "Không" },
-            { id: "TV-03-11", team: 3, saint: "Roco", name: "Thái Lê Hữu Tài", gender: "Nam", term: "2025 - 2030", phone: "0775806852", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-03-12", team: 3, saint: "Laurenso", name: "Trần Huy Thông", gender: "Nam", term: "2024 - 2028", phone: "345441476", uni: "Tôn Đức Thắng", major: "Cơ điện tử", scholarship: "Không" },
-            { id: "TV-03-13", team: 3, saint: "Maria", name: "Nguyễn Thu Thủy", gender: "Nữ", term: "2025 - 2029", phone: "0926368127", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không" },
-            { id: "TV-03-14", team: 3, saint: "Maria", name: "Phạm Phương Thúy", gender: "Nữ", term: "2022 - 2026", phone: "0328249581", uni: "Tôn Đức Thắng", major: "Kinh tế", scholarship: "Có" },
-            { id: "TV-03-15", team: 3, saint: "Maria", name: "Đặng Thị Quỳnh Trang", gender: "Nữ", term: "2023 - 2026", phone: "0325654057", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-03-16", team: 3, saint: "", name: "Trần Huyền Trân", gender: "Nữ", term: "2022 - 2026", phone: "0523822797", uni: "Mở TP.HCM", major: "Tài chính ngân hàng", scholarship: "Không" },
-            { id: "TV-03-17", team: 3, saint: "Maria", name: "Phùng Thị Uyên", gender: "Nữ", term: "2025 - 2029", phone: "0353445871", uni: "Tôn Đức Thắng", major: "Quản trị chuỗi cung ứng", scholarship: "Không" },
-            { id: "TV-03-18", team: 3, saint: "G.Baotixia", name: "Đậu Quang Vũ", gender: "Nam", term: "2023 - 2027", phone: "0366136763", uni: "Tôn Đức Thắng", major: "Điện công nghiệp", scholarship: "Không" },
-            { id: "TV-03-19", team: 3, saint: "Maria", name: "Nguyễn Như Ý", gender: "Nữ", term: "2024 - 2029", phone: "0852032166", uni: "Tôn Đức Thắng", major: "Khoa học bảo hộ", scholarship: "Không" },
+            { id: "TV-01-01", team: 1, saint: "Maria", name: "Huỳnh Khả Ái", gender: "Nữ", term: "2024 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-01-02", team: 1, saint: "", name: "Phạm Châm Anh", gender: "Nữ", term: "Chưa cập nhật", phone: "0941939211", uni: "Tôn Đức Thắng", major: "Quản trị", scholarship: "Không", avatar: "" },
+            { id: "TV-01-03", team: 1, saint: "Anna", name: "Trương Hồng Ân", gender: "Nữ", term: "2024 - 2026", phone: "0899780934", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không", avatar: "" },
+            { id: "TV-01-04", team: 1, saint: "Terexa", name: "Nguyễn Hồng Thiên Ân", gender: "Nữ", term: "2023 - 2026", phone: "0565298277", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không", avatar: "" },
+            { id: "TV-01-05", team: 1, saint: "", name: "Võ Hoàng Minh Chiến", gender: "Nam", term: "2025 - 2029", phone: "0358674917", uni: "Tôn Đức Thắng", major: "Kỹ thuật", scholarship: "Có", avatar: "" },
+            { id: "TV-01-06", team: 1, saint: "", name: "Thạch Thái Hà", gender: "Nam", term: "2024 - 2028", phone: "0385862705", uni: "Tôn Đức Thắng", major: "Công nghệ thông tin", scholarship: "Không", avatar: "" },
+            { id: "TV-01-07", team: 1, saint: "Maria", name: "Nguyễn Thị Phương Linh", gender: "Nữ", term: "2023 - 2027", phone: "0344512714", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-01-08", team: 1, saint: "", name: "Y LySa", gender: "Nữ", term: "2023 - 2027", phone: "0393351742", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không", avatar: "" },
+            { id: "TV-01-09", team: 1, saint: "Anna", name: "Nguyễn Thị Thu Ngân", gender: "Nữ", term: "2022 - 2026", phone: "0965354660", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Có", avatar: "" },
+            { id: "TV-01-10", team: 1, saint: "Madalena", name: "Nguyễn Thị Trúc Nhi", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính", scholarship: "Không", avatar: "" },
+            { id: "TV-01-11", team: 1, saint: "Maria", name: "Trần Khánh Phương", gender: "Nữ", term: "2025 - 2027", phone: "0344735653", uni: "Tôn Đức Thắng", major: "Du lịch", scholarship: "Không", avatar: "" },
+            { id: "TV-01-12", team: 1, saint: "Terexa", name: "Nguyễn Thị Ngọc Phượng", gender: "Nữ", term: "2023 - 2027", phone: "0868454167", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không", avatar: "" },
+            { id: "TV-01-13", team: 1, saint: "", name: "Vương Phúc Sang", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Môi trường", scholarship: "Không", avatar: "" },
+            { id: "TV-01-14", team: 1, saint: "", name: "Trương Sơn Tùng", gender: "Nam", term: "2023 - 2027", phone: "0944456521", uni: "Tôn Đức Thắng", major: "Điện tử", scholarship: "Không", avatar: "" },
+            { id: "TV-01-15", team: 1, saint: "Monica", name: "Nguyễn Thị Ngọc Hân", gender: "Nữ", term: "2025 - 2028", phone: "0355010800", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Không", avatar: "" },
+            { id: "TV-01-16", team: 1, saint: "Anna", name: "Lâm Nguyễn Anh Thư", gender: "Nữ", term: "2025 - 2029", phone: "0813060959", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không", avatar: "" },
+            { id: "TV-01-17", team: 1, saint: "", name: "Ngọc Duyên", gender: "Nữ", term: "Chưa rõ", phone: "0901603723", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không", avatar: "" },
+            { id: "TV-01-18", team: 1, saint: "Maria", name: "Phạm Ngọc Lan Chi", gender: "Nữ", term: "Chưa rõ", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không", avatar: "" },
 
             // ĐỘI 4
-            { id: "TV-04-01", team: 4, saint: "Giuse", name: "Phạm Tiến Dũng", gender: "Nam", term: "2025 - 2029", phone: "0385864092", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-04-02", team: 4, saint: "Maria", name: "Trà Thị Mỹ Duyên", gender: "Nữ", term: "2023 - 2027", phone: "0358137329", uni: "Tôn Đức Thắng", major: "Luật", scholarship: "Không" },
-            { id: "TV-04-03", team: 4, saint: "Gioaan Bt", name: "Hà Tấn Hiệp", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "IT", scholarship: "Không" },
-            { id: "TV-04-04", team: 4, saint: "Maria", name: "Hồ Thị Ngọc Lan", gender: "Nữ", term: "2025 - 2029", phone: "0364476423", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-04-05", team: 4, saint: "Giuse", name: "Nguyễn Phước Hoà Lâm", gender: "Nam", term: "2023 - 2027", phone: "0348319481", uni: "Tôn Đức Thắng", major: "Nội thất", scholarship: "Không" },
-            { id: "TV-04-06", team: 4, saint: "Maria", name: "Trần Như Mỹ", gender: "Nữ", term: "2023 - 2027", phone: "0969891762", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-04-07", team: 4, saint: "", name: "Nguyễn Trường Ngân", gender: "Nam", term: "2025 - 2029", phone: "0336093585", uni: "Bách Khoa", major: "Hóa dầu", scholarship: "Không" },
-            { id: "TV-04-08", team: 4, saint: "Maria", name: "Nguyễn Lê Mỹ Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Ngoại ngữ", scholarship: "Không" },
-            { id: "TV-04-09", team: 4, saint: "Maria", name: "Trần Thảo Nguyên", gender: "Nữ", term: "2022 - 2026", phone: "0823530750", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Có" },
-            { id: "TV-04-10", team: 4, saint: "", name: "Hoàng Thị Yến Nhi", gender: "Nữ", term: "2024 - 2027", phone: "0353985648", uni: "Tôn Đức Thắng", major: "Kinh doanh", scholarship: "Không" },
-            { id: "TV-04-11", team: 4, saint: "Maria", name: "Phan Thị Thúy Quỳnh", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-04-12", team: 4, saint: "Stephano", name: "Trương Duy Thiên", gender: "Nam", term: "2024 - 2028", phone: "0862100657", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không" },
-            { id: "TV-04-13", team: 4, saint: "Maria", name: "Trần Thanh Thúy", gender: "Nữ", term: "2023 - 2027", phone: "0819679031", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-04-14", team: 4, saint: "Anna", name: "Hồ Nguyễn Anh Thư", gender: "Nữ", term: "2022 - 2026", phone: "0368951509", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Không" },
-            { id: "TV-04-15", team: 4, saint: "Phero", name: "Phạm Minh Tiến", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Lao động xã hội", scholarship: "Không" },
-            { id: "TV-04-16", team: 4, saint: "Maria", name: "Nguyễn Thị Bảo Trâm", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-04-17", team: 4, saint: "Maria", name: "Phạm Thảo Trâm", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị thương mại", scholarship: "Không" },
-            { id: "TV-04-18", team: 4, saint: "", name: "Nguyễn Minh Đăng", gender: "Nam", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không" },
-            { id: "TV-04-19", team: 4, saint: "Phêrô", name: "Nguyễn Hồng Ân", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Xây dựng dân dụng", scholarship: "Không" },
-            // ĐỘI 5
-            { id: "TV-05-01", team: 5, saint: "Phero", name: "Nguyễn Duy", gender: "Nam", term: "2023 - 2028", phone: "0966929572", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-05-02", team: 5, saint: "Vincente", name: "Vũ Đặng Khắc Duy", gender: "Nam", term: "2022 - 2026", phone: "0385081857", uni: "Khoa Học Tự Nhiên", major: "Điện tử", scholarship: "Không" },
-            { id: "TV-05-03", team: 5, saint: "Gioan", name: "Liêng Hót Ha Brel", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Có" },
-            { id: "TV-05-04", team: 5, saint: "Giacobe", name: "Trần Giang Minh Hậu", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Điện kỹ thuật", scholarship: "Không" },
-            { id: "TV-05-05", team: 5, saint: "Agata", name: "Lê Thị Thúy Kiều", gender: "Nữ", term: "2022 - 2026", phone: "0377900356", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-05-06", team: 5, saint: "Maria", name: "Nguyễn Thị Mỹ Lan", gender: "Nữ", term: "2024 - 2028", phone: "0347189800", uni: "Tôn Đức Thắng", major: "Quy hoạch đô thị", scholarship: "Không" },
-            { id: "TV-05-07", team: 5, saint: "Maria", name: "Hờ Thị Lề", gender: "Nữ", term: "2025 - 2029", phone: "0372827736", uni: "Tôn Đức Thắng", major: "Khoa học môi trường", scholarship: "Không" },
-            { id: "TV-05-08", team: 5, saint: "Anna", name: "Trần Hà My", gender: "Nữ", term: "2022 - 2026", phone: "0763962291", uni: "Tôn Đức Thắng", major: "Thiết kế thời trang", scholarship: "Không" },
-            { id: "TV-05-09", team: 5, saint: "Terexa", name: "Phạm Thị Như Ngọc", gender: "Nữ", term: "2025 - 2029", phone: "0377262252", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-05-10", team: 5, saint: "Isave", name: "Nguyễn Thị Hạnh Nguyên", gender: "Nữ", term: "2025 - 2029", phone: "0369939546", uni: "Tôn Đức Thắng", major: "Kinh doanh", scholarship: "Không" },
-            { id: "TV-05-11", team: 5, saint: "Maria", name: "Tô Thị Quỳnh Như", gender: "Nữ", term: "2023 - 2027", phone: "0946574452", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-05-12", team: 5, saint: "Anna", name: "Lê Hồng Thanh", gender: "Nữ", term: "2024 - 2027", phone: "0867663674", uni: "Sư Phạm Kỹ Thuật", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-05-13", team: 5, saint: "", name: "Đặng Phan Hoài Thịnh", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Công nghệ thông tin", scholarship: "Có" },
-            { id: "TV-05-14", team: 5, saint: "Anna", name: "Lê Thị Mỹ Trang", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kinh doanh quốc tế", scholarship: "Không" },
-            { id: "TV-05-15", team: 5, saint: "Phaolo", name: "Đặng Quốc Trung", gender: "Nam", term: "2025 - 2029", phone: "0326727817", uni: "Tôn Đức Thắng", major: "Kỹ thuật điện", scholarship: "Không" },
-            { id: "TV-05-16", team: 5, saint: "Dominic", name: "Lê Quang Vinh", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Tự động hóa", scholarship: "Không" },
-            { id: "TV-05-17", team: 5, saint: "Têrêsa", name: "Phùng Nhã Vy", gender: "Nữ", term: "Chưa cập nhật", phone: "0815781252", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Trung", scholarship: "Không" },
-            { id: "TV-05-18", team: 5, saint: "Maria", name: "Trần Ngọc Nhã Yên", gender: "Nữ", term: "2025 - 2029", phone: "0342869095", uni: "Tôn Đức Thắng", major: "Quy hoạch", scholarship: "Không" },
-            { id: "TV-05-19", team: 5, saint: "", name: "Nguyễn Văn Quang", gender: "Nam", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Điện tử công nghiệp", scholarship: "Không" },
-
-            // ĐỘI 6
-            { id: "TV-06-01", team: 6, saint: "Phaolo", name: "Trịnh Nguyễn Duy Anh", gender: "Nam", term: "2024 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Cơ điện tử", scholarship: "Không" },
-            { id: "TV-06-02", team: 6, saint: "Giuse", name: "Sùng Thanh Cao", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Lao động", scholarship: "Có" },
-            { id: "TV-06-03", team: 6, saint: "Anna", name: "Phùng Linh Chi", gender: "Nữ", term: "2022 - 2026", phone: "389.634.041", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-06-04", team: 6, saint: "Terexa", name: "Phạm Thị Thùy Dương", gender: "Nữ", term: "2023 - 2027", phone: "0849664996", uni: "Tôn Đức Thắng", major: "Kế toán", scholarship: "Không" },
-            { id: "TV-06-05", team: 6, saint: "Anna", name: "Nguyễn Khả Hân", gender: "Nữ", term: "2024 - 2028", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không" },
-            { id: "TV-06-06", team: 6, saint: "Martino", name: "Nguyễn Đức Huy", gender: "Nam", term: "2021 - 2027", phone: "0931728670", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-06-07", team: 6, saint: "Terexa", name: "Phạm Thị Trúc Linh", gender: "Nữ", term: "2025 - 2029", phone: "0358237420", uni: "Tôn Đức Thắng", major: "Thiết kế nội thất", scholarship: "Không" },
-            { id: "TV-06-08", team: 6, saint: "Cecilia", name: "Nguyễn Thị Trà My", gender: "Nữ", term: "2023 - 2026", phone: "0348104948", uni: "Mở TP.HCM", major: "Kinh doanh", scholarship: "Không" },
-            { id: "TV-06-09", team: 6, saint: "", name: "Nguyễn Thị Nhã Ngọc", gender: "Nữ", term: "2025 - 2028", phone: "813096687", uni: "Tôn Đức Thắng", major: "Tài chính ngân hàng", scholarship: "Không" },
-            { id: "TV-06-10", team: 6, saint: "Terxa", name: "Nguyễn Trần Bảo Ngọc", gender: "Nữ", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học môi trường", scholarship: "Không" },
-            { id: "TV-06-11", team: 6, saint: "Anna", name: "Phạm Yến Như", gender: "Nữ", term: "2023 - 2027", phone: "0868014307", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-06-12", team: 6, saint: "Giêrađô", name: "Tạ Thiên Phúc", gender: "Nam", term: "2024 - 2028", phone: "0896232835", uni: "Tôn Đức Thắng", major: "Kỹ thuật phần mềm", scholarship: "Không" },
-            { id: "TV-06-13", team: 6, saint: "Catarina", name: "Lương Thị Thùy Trang", gender: "Nữ", term: "2025 - 2029", phone: "0949142509", uni: "Tôn Đức Thắng", major: "Dược học", scholarship: "Không" },
-            { id: "TV-06-14", team: 6, saint: "P.Xavie", name: "Nguyễn Quốc Trung", gender: "Nam", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Điện công nghiệp", scholarship: "Không" },
-            { id: "TV-06-15", team: 6, saint: "Maria", name: "Vũ Thị Ánh Tuyết", gender: "Nữ", term: "2025 - 2028", phone: "0347575643", uni: "Tôn Đức Thắng", major: "Quản trị kinh doanh", scholarship: "Không" },
-            { id: "TV-06-16", team: 6, saint: "", name: "Trần Thị Thanh Thúy", gender: "Nữ", term: "2024 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-06-17", team: 6, saint: "Teresa", name: "Trần Ái Mỹ", gender: "Nữ", term: "2025 - 2028", phone: "914130331", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không" },
-            { id: "TV-06-18", team: 6, saint: "Maria", name: "Nguyễn Thị Thu Trang", gender: "Nữ", term: "2023 - 2027", phone: "388539924", uni: "Tôn Đức Thắng", major: "Mỹ thuật công nghiệp", scholarship: "Không" },
-                        // ĐỘI 7
-            { id: "TV-07-01", team: 7, saint: "Maria", name: "Lê Trí Bảo", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-07-02", team: 7, saint: "Anna", name: "Nguyễn Tiểu Hạ Duyên", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Luật học", scholarship: "Không" },
-            { id: "TV-07-03", team: 7, saint: "Maria", name: "Trần Thị Tuyết Hạnh", gender: "Nữ", term: "2025 - 2029", phone: "0379233454", uni: "Tôn Đức Thắng", major: "Kế toán tổng hợp", scholarship: "Không" },
-            { id: "TV-07-04", team: 7, saint: "Maria", name: "Đinh Nguyễn Phương Hồng", gender: "Nữ", term: "2022 - 2026", phone: "0868972230", uni: "Công Nghệ Sài Gòn", major: "Thiết kế đồ họa", scholarship: "Không" },
-            { id: "TV-07-05", team: 7, saint: "Terexa", name: "Hoàng Thị Thanh Huyền", gender: "Nữ", term: "2023 - 2027", phone: "0896535059", uni: "Tôn Đức Thắng", major: "Kiến trúc cảnh quan", scholarship: "Không" },
-            { id: "TV-07-06", team: 7, saint: "Terexa", name: "Phạm Thị Trúc Ly", gender: "Nữ", term: "2025 - 2029", phone: "0379986099", uni: "Tôn Đức Thắng", major: "Nội thất", scholarship: "Không" },
-            { id: "TV-07-07", team: 7, saint: "Giuse", name: "Nguyễn Minh Mẫn", gender: "Nam", term: "2023 - 2027", phone: "0912937028", uni: "Tôn Đức Thắng", major: "Kỹ thuật môi trường", scholarship: "Có" },
-            { id: "TV-07-08", team: 7, saint: "Maria", name: "Đỗ Thị Thanh Ngân", gender: "Nữ", term: "2023 - 2027", phone: "0787970529", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-07-09", team: 7, saint: "Maria", name: "Phạm Thị Quỳnh Như", gender: "Nữ", term: "2024 - 2028", phone: "0327649085", uni: "Tôn Đức Thắng", major: "Ngôn ngữ Anh", scholarship: "Không" },
-            { id: "TV-07-10", team: 7, saint: "Maria", name: "Lê Thị Ngọc Thảo", gender: "Nữ", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Xã hội học", scholarship: "Không" },
-            { id: "TV-07-11", team: 7, saint: "M.Terexa", name: "Phan Quỳnh Thư", gender: "Nữ", term: "2023 - 2027", phone: "0336505100", uni: "Tôn Đức Thắng", major: "Kiến trúc", scholarship: "Không" },
-            { id: "TV-07-12", team: 7, saint: "Phero", name: "Nguyễn Hoàng Đức Toàn", gender: "Nam", term: "2022 - 2026", phone: "", uni: "Tôn Đức Thắng", major: "Khoa học máy tính", scholarship: "Không" },
-            { id: "TV-07-13", team: 7, saint: "Phero", name: "Nguyễn Hoàng Anh Tuấn", gender: "Nam", term: "2024 - 2028", phone: "0974705239", uni: "Tôn Đức Thắng", major: "Điện công nghiệp", scholarship: "Không" },
-            { id: "TV-07-14", team: 7, saint: "Cécilia", name: "Nguyễn Hồ Ngọc Tuyền", gender: "Nữ", term: "2023 - 2027", phone: "0346826031", uni: "Tôn Đức Thắng", major: "Mỹ thuật", scholarship: "Có" },
-            { id: "TV-07-15", team: 7, saint: "Maria", name: "Lữ Thị Bảo Yến", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Tài chính", scholarship: "Không" },
-            { id: "TV-07-16", team: 7, saint: "Maria", name: "Hoàng Thị Tâm", gender: "Nữ", term: "2023 - 2027", phone: "", uni: "Tôn Đức Thắng", major: "Quản trị kinh doanh", scholarship: "Không" },
-            { id: "TV-07-17", team: 7, saint: "Tô Ma", name: "Võ Duy Quang", gender: "Nam", term: "2025 - 2029", phone: "", uni: "Tôn Đức Thắng", major: "Kỹ thuật xây dựng", scholarship: "Không" }
+            { id: "TV-04-05", team: 4, saint: "Giuse", name: "Nguyễn Phước Hoà Lâm", gender: "Nam", term: "2023 - 2027", phone: "0348319481", uni: "Tôn Đức Thắng", major: "Nội thất", scholarship: "Không", avatar: "" }
         ];
 
         const TEAMS_NAME_MAP = {
-            1: "Đội 1 - Galilea",
-            2: "Đội 2 - Nazareth",
-            3: "Đội 3 - Mattheu",
-            4: "Đội 4 - Andre",
-            5: "Đội 5 - Sinai",
-            6: "Đội 6 - Golgotha",
-            7: "Đội 7 - Cana"
+            1: "Đội 1 - Galilea", 2: "Đội 2 - Nazareth", 3: "Đội 3 - Mattheu",
+            4: "Đội 4 - Andre", 5: "Đội 5 - Sinai", 6: "Đội 6 - Golgotha", 7: "Đội 7 - Cana"
         };
 
-        // Khởi tạo LocalStorage hệ thống
-        if (!localStorage.getItem("TT_Columns")) {
-            localStorage.setItem("TT_Columns", JSON.stringify(["Tuần 1 - T5", "Tuần 2 - T5"]));
+        // KHỞI TẠO TÀI KHOẢN MẬT KHẨU GỐC ĐỘNG
+        if (!localStorage.getItem("TT_Accounts_Database")) {
+            const initialAccounts = {
+                "bandonghanh": { role: "admin", targetTeam: "all", label: "Ban Đồng Hành", pass: "bdh2527" },
+                "doi1": { role: "leader", targetTeam: 1, label: "Đội Trưởng Đội 1", pass: "doi12026" },
+                "doi2": { role: "leader", targetTeam: 2, label: "Đội Trưởng Đội 2", pass: "doi22026" },
+                "doi3": { role: "leader", targetTeam: 3, label: "Đội Trưởng Đội 3", pass: "doi32026" },
+                "doi4": { role: "leader", targetTeam: 4, label: "Đội Trưởng Đội 4", pass: "doi42026" },
+                "doi5": { role: "leader", targetTeam: 5, label: "Đội Trưởng Đội 5", pass: "doi52026" },
+                "doi6": { role: "leader", targetTeam: 6, label: "Đội Trưởng Đội 6", pass: "doi62026" },
+                "doi7": { role: "leader", targetTeam: 7, label: "Đội Trưởng Đội 7", pass: "doi72026" }
+            };
+            localStorage.setItem("TT_Accounts_Database", JSON.stringify(initialAccounts));
+                }
+                     if (!localStorage.getItem("TT_Timeline_Structure")) {
+            const defaultTimeline = {
+                "2025": ["Tháng 11", "Tháng 12"],
+                "2026": ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5"]
+            };
+            localStorage.setItem("TT_Timeline_Structure", JSON.stringify(defaultTimeline));
         }
-        if (!localStorage.getItem("TT_Attendance")) {
-            localStorage.setItem("TT_Attendance", JSON.stringify({}));
-        }
-        if (!localStorage.getItem("TT_Discipline")) {
-            localStorage.setItem("TT_Discipline", JSON.stringify({}));
-        }
+        if (!localStorage.getItem("TT_Attendance")) localStorage.setItem("TT_Attendance", JSON.stringify({}));
+        if (!localStorage.getItem("TT_Discipline")) localStorage.setItem("TT_Discipline", JSON.stringify({}));
+        if (!localStorage.getItem("TT_Dynamic_Members")) localStorage.setItem("TT_Dynamic_Members", JSON.stringify(STATIC_MEMBERS_DATA));
 
         let currentUser = null;
-        let selectedTimeColumnIndex = 0;
+        let currentYear = "2026";
+        let currentMonth = "Tháng 5";
+        let currentWeek = 1;
+        let tempAvatarBase64 = "";
+        let isSystemLockedForLeader = false;
 
-        // Xử lý logic đăng nhập
+        // KIỂM TRA KHÓA THỨ TƯ HÀNG TUẦN VÀ KHÓA THÁNG CŨ ĐỐI VỚI LEADER
+        function checkRealtimeLockStatus() {
+            const now = new Date();
+            const dayOfWeek = now.getDay(); 
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+
+            let weekLocked = false;
+            if (dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6) {
+                weekLocked = true;
+            } else if (dayOfWeek === 3 && (hours > 23 || (hours === 23 && minutes >= 59))) {
+                weekLocked = true;
+            }
+
+            const structure = getTimelineStructure();
+            const availableMonths = structure[currentYear] || [];
+            const latestMonthOnSystem = availableMonths[availableMonths.length - 1] || "";
+            let monthLocked = (currentMonth !== latestMonthOnSystem);
+
+            const banner = document.getElementById("lock-banner");
+            const bTitle = document.getElementById("lock-banner-title");
+            const bDesc = document.getElementById("lock-banner-desc");
+
+            if (currentUser && currentUser.role === 'leader') {
+                if (monthLocked) {
+                    isSystemLockedForLeader = true;
+                    banner.classList.remove("hidden");
+                    bTitle.innerText = "Tháng lịch sử đã đóng khóa";
+                    bDesc.innerText = `Đội trưởng chỉ được xem lại dữ liệu của ${currentMonth}. Quyền chỉnh sửa chỉ mở cho tháng mới nhất (${latestMonthOnSystem}).`;
+                } else if (weekLocked) {
+                    isSystemLockedForLeader = true;
+                    banner.classList.remove("hidden");
+                    bTitle.innerText = "Hệ thống đang khóa chỉnh sửa tuần";
+                    bDesc.innerText = "Đã quá hạn 23:59 ngày Thứ Tư. Quyền hạn chỉnh sửa của Đội trưởng đã đóng và sẽ mở lại vào ngày Chủ Nhật.";
+                } else {
+                    isSystemLockedForLeader = false;
+                    banner.classList.add("hidden");
+                }
+            } else {
+                isSystemLockedForLeader = false;
+                banner.classList.add("hidden");
+            }
+        }
+
+        // ĐỒNG BỘ LOGO ĐẠI DIỆN WEB
+        function initAppLogo() {
+            const savedLogo = localStorage.getItem("TT_App_Logo");
+            const defaultLogo = "https://placehold.co/150x150/2563eb/ffffff?text=TTTT";
+            document.getElementById("app-logo-login").src = savedLogo || defaultLogo;
+            document.getElementById("app-logo-main").src = savedLogo || defaultLogo;
+        }
+        window.onload = initAppLogo;
+
+        function triggerAppLogoUpload() {
+            if (currentUser && currentUser.role === 'admin') document.getElementById("app-logo-input").click();
+        }
+
+        function previewAppLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const base64Str = e.target.result;
+                    localStorage.setItem("TT_App_Logo", base64Str);
+                    document.getElementById("app-logo-login").src = base64Str;
+                    document.getElementById("app-logo-main").src = base64Str;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function getActiveMembers() { return JSON.parse(localStorage.getItem("TT_Dynamic_Members")); }
+        function getTimelineStructure() { return JSON.parse(localStorage.getItem("TT_Timeline_Structure")); }
+        function getAccountsDatabase() { return JSON.parse(localStorage.getItem("TT_Accounts_Database")); }
+
         function handleLogin() {
             const user = document.getElementById("username").value.trim();
             const pass = document.getElementById("password").value.trim();
+            const accountsDb = getAccountsDatabase();
 
-            if (user === "bandonghanh" && pass === "bdh2026") {
-                currentUser = { role: "admin", targetTeam: "all" };
-            } else if (user.startsWith("doitruong") && pass === `doi${user.replace("doitruong", "")}2026`) {
-                const teamNum = parseInt(user.replace("doitruong", ""));
-                if (teamNum >= 1 && teamNum <= 7) {
-                    currentUser = { role: "leader", targetTeam: teamNum };
-                }
-            }
-
-            if (currentUser) {
-                document.getElementById("login-screen").classList.add("hidden");
-                document.getElementById("main-app").classList.remove("hidden");
+            if (accountsDb[user] && accountsDb[user].pass === pass) {
+                currentUser = { role: accountsDb[user].role, targetTeam: accountsDb[user].targetTeam, username: user, label: accountsDb[user].label };
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("main-app").style.display = "flex";
+                checkRealtimeLockStatus();
+                initTimelineSelectors();
                 setupInterfaceAccess();
             } else {
-                alert("Sai tài khoản hoặc mật khẩu! Vui lòng kiểm tra lại.");
+                alert("Tài khoản hoặc mật khẩu không chính xác!");
             }
-        }
-
-        function quickLogin(u, p) {
-            document.getElementById("username").value = u;
-            document.getElementById("password").value = p;
-            handleLogin();
         }
 
         function handleLogout() {
             currentUser = null;
-            document.getElementById("main-app").classList.add("hidden");
-            document.getElementById("login-screen").classList.remove("hidden");
+            document.getElementById("main-app").style.display = "none";
+            document.getElementById("login-screen").style.display = "flex";
         }
                 function setupInterfaceAccess() {
-            const roleTxt = document.getElementById("user-display-role");
-            const scopeTxt = document.getElementById("user-display-scope");
-            const filterBox = document.getElementById("admin-filter-box");
-            const selector = document.getElementById("team-selector");
+            const selector = document.getElementById("team-selector"); selector.innerHTML = "";
+            const logoHoverText = document.getElementById("app-logo-hover-text");
+            const securityNavBtn = document.getElementById("nav-btn-security");
 
             if (currentUser.role === "admin") {
-                roleTxt.innerText = "Ban Đồng Hành";
-                scopeTxt.innerText = "Quản lý toàn bộ 7 đội";
-                filterBox.classList.remove("hidden");
-                selector.value = "1";
+                document.getElementById("user-role-badge").innerText = currentUser.label;
+                document.getElementById("admin-time-btn").classList.remove("hidden"); securityNavBtn.classList.remove("hidden"); logoHoverText.classList.remove("hidden"); 
+                for (let i = 1; i <= 7; i++) selector.innerHTML += `<option value="${i}">${TEAMS_NAME_MAP[i]}</option>`;
             } else {
-                roleTxt.innerText = `Đội Trưởng Đội ${currentUser.targetTeam}`;
-                scopeTxt.innerText = `Quản trị nội bộ: ${TEAMS_NAME_MAP[currentUser.targetTeam]}`;
-                filterBox.classList.add("hidden");
-                selector.value = currentUser.targetTeam.toString();
+                document.getElementById("user-role-badge").innerText = currentUser.label;
+                document.getElementById("admin-time-btn").classList.add("hidden"); securityNavBtn.classList.add("hidden"); logoHoverText.classList.add("hidden"); 
+                selector.innerHTML = `<option value="${currentUser.targetTeam}">${TEAMS_NAME_MAP[currentUser.targetTeam]}</option>`;
             }
-
-            renderTimeTabs();
-            renderAttendanceTable();
-            renderRankingList();
-            renderMemberCards();
-            lucide.createIcons();
+            renderWeekTabs(); renderAttendanceTable(); renderRankingList(); renderMemberCards(); renderSecurityAccountsTable();
         }
 
-        // Quản lý Tab thời gian
-        function renderTimeTabs() {
-            const columns = JSON.parse(localStorage.getItem("TT_Columns"));
-            const container = document.getElementById("time-columns-tab");
-            container.innerHTML = "";
-
-            columns.forEach((col, idx) => {
-                const btn = document.createElement("button");
-                btn.className = `px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition flex-1 text-center ${idx === selectedTimeColumnIndex ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`;
-                btn.innerText = col;
-                btn.onclick = () => {
-                    selectedTimeColumnIndex = idx;
-                    renderTimeTabs();
-                    renderAttendanceTable();
-                };
-                container.appendChild(btn);
-            });
+        function initTimelineSelectors() {
+            const structure = getTimelineStructure();
+            const yearSelect = document.getElementById("year-selector");
+            yearSelect.innerHTML = Object.keys(structure).map(y => `<option value="${y}" ${y === currentYear ? 'selected' : ''}>Năm ${y}</option>`).join('');
+            const monthSelect = document.getElementById("month-selector");
+            monthSelect.innerHTML = (structure[currentYear] || []).map(m => `<option value="${m}" ${m === currentMonth ? 'selected' : ''}>${m}</option>`).join('');
         }
 
-        function openTimeManager() {
-            document.getElementById("time-modal").classList.remove("hidden");
+        function handleYearChange() {
+            currentYear = document.getElementById("year-selector").value; const structure = getTimelineStructure();
+            currentMonth = (structure[currentYear] && structure[currentYear][0]) ? structure[currentYear][0] : "";
+            initTimelineSelectors(); currentWeek = 1; renderWeekTabs(); renderAttendanceTable(); renderRankingList();
         }
 
-        function closeTimeManager() {
-            document.getElementById("time-modal").classList.add("hidden");
-            document.getElementById("new-time-label").value = "";
+        function handleMonthChange() {
+            currentMonth = document.getElementById("month-selector").value; currentWeek = 1; renderWeekTabs(); renderAttendanceTable(); renderRankingList();
         }
 
-        function addNewTimeColumn() {
-            const label = document.getElementById("new-time-label").value.trim();
-            if (!label) return alert("Vui lòng nhập tên tuần/tháng!");
-
-            const columns = JSON.parse(localStorage.getItem("TT_Columns"));
-            columns.push(label);
-            localStorage.setItem("TT_Columns", JSON.stringify(columns));
-            
-            selectedTimeColumnIndex = columns.length - 1;
-            closeTimeManager();
-            renderTimeTabs();
-            renderAttendanceTable();
+        function renderWeekTabs() {
+            const container = document.getElementById("week-tabs-container"); container.innerHTML = "";
+            for (let w = 1; w <= 4; w++) {
+                container.innerHTML += `<button onclick="selectWeek(${w})" class="px-3 py-1.5 rounded-lg text-xs font-bold transition flex-1 text-center ${w === currentWeek ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}">Tuần ${w}</button>`;
+            }
         }
 
-        // Vẽ bảng điểm danh
+        function addNewMonth() {
+            const label = document.getElementById("new-time-label").value.trim(); if (!label) return alert("Vui lòng nhập tên tháng!");
+            const structure = getTimelineStructure(); if (structure[currentYear].includes(label)) return alert("Tháng này đã tồn tại!");
+            structure[currentYear].push(label); localStorage.setItem("TT_Timeline_Structure", JSON.stringify(structure));
+            currentMonth = label; currentWeek = 1; closeTimeManager(); initTimelineSelectors(); renderWeekTabs(); renderAttendanceTable(); renderRankingList();
+        }
+
+        function handleTeamChange() { renderAttendanceTable(); renderMemberCards(); }
+
         function renderAttendanceTable() {
-            const currentTeam = parseInt(document.getElementById("team-selector").value);
-            document.getElementById("current-team-title").innerText = TEAMS_NAME_MAP[currentTeam];
-
-            const members = SOURCE_MEMBERS_DATA.filter(m => m.team === currentTeam);
-            const columns = JSON.parse(localStorage.getItem("TT_Columns"));
-            const activeCol = columns[selectedTimeColumnIndex];
-
-            const attendanceDb = JSON.parse(localStorage.getItem("TT_Attendance"));
-            const disciplineDb = JSON.parse(localStorage.getItem("TT_Discipline"));
-
-            const container = document.getElementById("attendance-rows-container");
-            container.innerHTML = "";
+            checkRealtimeLockStatus();
+            const team = parseInt(document.getElementById("team-selector").value); document.getElementById("current-team-title").innerText = TEAMS_NAME_MAP[team];
+            const members = getActiveMembers().filter(m => m.team === team); const container = document.getElementById("attendance-rows-container"); container.innerHTML = "";
+            const attDb = JSON.parse(localStorage.getItem("TT_Attendance")); const disDb = JSON.parse(localStorage.getItem("TT_Discipline"));
+            const isDisabledStr = isSystemLockedForLeader ? "disabled" : "";
 
             members.forEach(m => {
                 let score = 100;
+                for (let w = 1; w <= 4; w++) {
+                    const aV = attDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || "X"; if (aV === "K") score -= 10; else if (aV === "P") score -= 2;
+                    score -= (parseInt(disDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || 0) * 5);
+                }
+                const cA = attDb[`${m.id}_${currentYear}_${currentMonth}_W${currentWeek}`] || "X"; const cD = disDb[`${m.id}_${currentYear}_${currentMonth}_W${currentWeek}`] || 0;
 
-                columns.forEach(col => {
-                    const attKey = `${m.id}_${col}`;
-                    const attVal = attendanceDb[attKey] || "X";
-                    if (attVal === "K") score -= 10;
-                    if (attVal === "P") score -= 2;
-
-                    const disKey = `${m.id}_${col}`;
-                    const disVal = disciplineDb[disKey] || 0;
-                    score -= (parseInt(disVal) * 5);
-                });
-
-                const attKey = `${m.id}_${activeCol}`;
-                const currentAtt = attendanceDb[attKey] || "X";
-
-                const disKey = `${m.id}_${activeCol}`;
-                const currentDis = disciplineDb[disKey] || 0;
-
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-gray-50/70 transition";
-                tr.innerHTML = `
-                    <td class="py-3.5 px-4 font-medium text-gray-900 sticky left-0 bg-white/90 backdrop-blur-sm z-10 shadow-[2px_0_5px_rgba(0,0,0,0.02)]">
-                        <div class="text-xs font-semibold text-gray-400">${m.saint || ''}</div>
-                        <div class="text-sm font-bold text-gray-800 -mt-0.5">${m.name}</div>
-                    </td>
-                    <td class="py-3.5 px-3 text-center">
-                        <select onchange="updateAttendance('${m.id}', '${activeCol}', this.value)" class="bg-gray-50 border border-gray-200 text-xs font-bold rounded-lg px-2.5 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="X" ${currentAtt === 'X' ? 'selected' : ''}>X (Có)</option>
-                            <option value="K" ${currentAtt === 'K' ? 'selected' : ''}>K (Vắng)</option>
-                            <option value="P" ${currentAtt === 'P' ? 'selected' : ''}>P (Phép)</option>
-                        </select>
-                    </td>
-                    <td class="py-3.5 px-3 text-center">
-                        <select onchange="updateDiscipline('${m.id}', '${activeCol}', this.value)" class="bg-gray-50 border border-gray-200 text-xs font-medium rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-orange-500">
-                            <option value="0" ${currentDis == 0 ? 'selected' : ''}>Chuẩn tác phong</option>
-                            <option value="1" ${currentDis == 1 ? 'selected' : ''}>Lỗi trang phục (-5)</option>
-                            <option value="2" ${currentDis == 2 ? 'selected' : ''}>Đi trễ / Vi phạm (-10)</option>
-                        </select>
-                    </td>
-                    <td class="py-3.5 px-4 text-right font-bold text-sm ${score < 80 ? 'text-red-600' : 'text-green-600'}">
-                        ${score}đ
-                    </td>
-                `;
-                container.appendChild(tr);
+                container.innerHTML += `
+                    <tr class="hover:bg-gray-50/70 transition">
+                        <td class="py-3.5 px-4 font-medium text-gray-900 sticky left-0 bg-white z-10 flex items-center space-x-2">
+                            <img src="${m.avatar || 'https://placehold.co/40x40/e2e8f0/64748b?text=?'}" class="w-7 h-7 rounded-full object-cover">
+                            <div><div class="text-[9px] font-semibold text-gray-400 leading-none">${m.saint || ''}</div><div class="text-xs font-bold text-gray-800 mt-0.5">${m.name}</div></div>
+                        </td>
+                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveAtt('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-xs font-bold rounded-lg p-1"><option value="X" ${cA === 'X' ? 'selected' : ''}>X (Có)</option><option value="K" ${cA === 'K' ? 'selected' : ''}>K (Vắng)</option><option value="P" ${cA === 'P' ? 'selected' : ''}>P (Phép)</option></select></td>
+                        <td class="py-3.5 px-2 text-center"><select ${isDisabledStr} onchange="saveDis('${m.id}', this.value)" class="bg-gray-50 disabled:opacity-60 border border-gray-200 text-[10px] font-medium rounded-lg p-1"><option value="0" ${cD == 0 ? 'selected' : ''}>Chuẩn</option><option value="1" ${cD == 1 ? 'selected' : ''}>Áo/Khăn (-5)</option><option value="2" ${cD == 2 ? 'selected' : ''}>Trễ/Vi phạm (-10)</option></select></td>
+                        <td class="py-3.5 px-4 text-right font-bold text-xs ${score < 80 ? 'text-red-600' : 'text-green-600'}">${score}đ</td>
+                    </tr>`;
             });
         }
 
-        function updateAttendance(memberId, col, val) {
-            const db = JSON.parse(localStorage.getItem("TT_Attendance"));
-            db[`${memberId}_${col}`] = val;
-            localStorage.setItem("TT_Attendance", JSON.stringify(db));
-            renderAttendanceTable();
-            renderRankingList();
+        function saveAtt(mId, val) {
+            if (isSystemLockedForLeader) return;
+            const db = JSON.parse(localStorage.getItem("TT_Attendance")); db[`${mId}_${currentYear}_${currentMonth}_W${currentWeek}`] = val;
+            localStorage.setItem("TT_Attendance", JSON.stringify(db)); renderAttendanceTable(); renderRankingList();
         }
 
-        function updateDiscipline(memberId, col, val) {
-            const db = JSON.parse(localStorage.getItem("TT_Discipline"));
-            db[`${memberId}_${col}`] = parseInt(val);
-            localStorage.setItem("TT_Discipline", JSON.stringify(db));
-            renderAttendanceTable();
-            renderRankingList();
+        function saveDis(mId, val) {
+            if (isSystemLockedForLeader) return;
+            const db = JSON.parse(localStorage.getItem("TT_Discipline")); db[`${mId}_${currentYear}_${currentMonth}_W${currentWeek}`] = parseInt(val);
+            localStorage.setItem("TT_Discipline", JSON.stringify(db)); renderAttendanceTable(); renderRankingList();
         }
-                // Bảng tổng sắp thi đua
+
+        function calculateScores() {
+            const attDb = JSON.parse(localStorage.getItem("TT_Attendance")); const disDb = JSON.parse(localStorage.getItem("TT_Discipline"));
+            return [1, 2, 3, 4, 5, 6, 7].map(tNum => {
+                const members = getActiveMembers().filter(m => m.team === tNum); let total = 0;
+                members.forEach(m => {
+                    let s = 100;
+                    for (let w = 1; w <= 4; w++) {
+                        const aV = attDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || "X"; if (aV === "K") s -= 10; else if (aV === "P") s -= 2;
+                        s -= (parseInt(disDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || 0) * 5);
+                    }
+                    total += s;
+                });
+                return { id: tNum, name: TEAMS_NAME_MAP[tNum], score: members.length ? Math.round(total / members.length) : 0, size: members.length };
+            }).sort((a, b) => b.score - a.score);
+        }
+
         function renderRankingList() {
-            const columns = JSON.parse(localStorage.getItem("TT_Columns"));
-            const attendanceDb = JSON.parse(localStorage.getItem("TT_Attendance"));
-            const disciplineDb = JSON.parse(localStorage.getItem("TT_Discipline"));
-
-            const teamScores = [1, 2, 3, 4, 5, 6, 7].map(teamNum => {
-                const teamMembers = SOURCE_MEMBERS_DATA.filter(m => m.team === teamNum);
-                let totalTeamScore = 0;
-
-                teamMembers.forEach(m => {
-                    let memberScore = 100;
-                    columns.forEach(col => {
-                        const attVal = attendanceDb[`${m.id}_${col}`] || "X";
-                        if (attVal === "K") memberScore -= 10;
-                        if (attVal === "P") memberScore -= 2;
-
-                        const disVal = disciplineDb[`${m.id}_${col}`] || 0;
-                        memberScore -= (parseInt(disVal) * 5);
-                    });
-                    totalTeamScore += memberScore;
-                });
-
-                const avgScore = teamMembers.length ? Math.round(totalTeamScore / teamMembers.length) : 0;
-                return { teamId: teamNum, teamName: TEAMS_NAME_MAP[teamNum], score: avgScore, totalMembers: teamMembers.length };
-            });
-
-            teamScores.sort((a, b) => b.score - a.score);
-
-            const container = document.getElementById("ranking-list-container");
-            container.innerHTML = "";
-
-            teamScores.forEach((t, index) => {
-                let medal = "";
-                if (index === 0) medal = "🥇 ";
-                else if (index === 1) medal = "🥈 ";
-                else if (index === 2) medal = "🥉 ";
-
-                const div = document.createElement("div");
-                div.className = "p-4 flex items-center justify-between hover:bg-gray-50 transition";
-                div.innerHTML = `
-                    <div class="flex items-center space-x-3">
-                        <span class="text-sm font-black w-6 text-gray-400 text-center">${index + 1}</span>
-                        <div>
-                            <h4 class="text-sm font-bold text-gray-900">${medal}${t.teamName}</h4>
-                            <p class="text-[11px] text-gray-400">Sĩ số nhân sự: ${t.totalMembers} thành viên</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-base font-black text-blue-600">${t.score}đ</span>
-                        <span class="text-[10px] text-gray-400 block">Đạt chuẩn Trung Bình</span>
-                    </div>`;
-                container.appendChild(div);
+            document.getElementById("ranking-title-text").innerText = `${currentMonth} - Năm ${currentYear}`;
+            const container = document.getElementById("ranking-list-container"); container.innerHTML = "";
+            calculateScores().forEach((t, i) => {
+                let medal = ""; let bg = "text-gray-400 bg-gray-100";
+                if (i === 0) { medal = "🥇 "; bg = "text-yellow-700 bg-yellow-100"; }
+                else if (i === 1) { medal = "🥈 "; bg = "text-gray-700 bg-gray-200"; }
+                else if (i === 2) { medal = "🥉 "; bg = "text-amber-800 bg-amber-100"; }
+                container.innerHTML += `<div class="p-4 flex items-center justify-between hover:bg-gray-50 transition"><div class="flex items-center space-x-3"><span class="text-xs font-black px-2 py-1 rounded-md ${bg}">${i + 1}</span><div><h4 class="text-xs font-bold text-gray-900">${medal}${t.name}</h4><p class="text-[10px] text-gray-400">Sĩ số: ${t.size} người</p></div></div><div class="text-right"><span class="text-sm font-black text-blue-600">${t.score}đ</span></div></div>`;
             });
         }
 
-        // Hiển thị Hồ sơ nhân sự
         function renderMemberCards() {
-            const currentTeam = parseInt(document.getElementById("team-selector").value);
-            const members = SOURCE_MEMBERS_DATA.filter(m => m.team === currentTeam);
-            const container = document.getElementById("member-cards-container");
-            container.innerHTML = "";
+            const team = parseInt(document.getElementById("team-selector").value);
+            const container = document.getElementById("member-cards-container"); container.innerHTML = "";
+            const isAdmin = currentUser && currentUser.role === 'admin';
 
-            members.forEach(m => {
-                const card = document.createElement("div");
-                card.className = "bg-white p-4 rounded-2xl border border-gray-150 shadow-sm space-y-2 relative overflow-hidden";
-                card.innerHTML = `
-                    <div class="absolute right-0 top-0 bg-gray-100 text-gray-600 text-[10px] font-bold px-2.5 py-1 rounded-bl-xl uppercase tracking-wider">${m.gender}</div>
-                    <div>
-                        <span class="text-xs font-semibold text-blue-500 block">${m.saint || 'Không có tên thánh'}</span>
-                        <h4 class="text-sm font-black text-gray-900 -mt-0.5">${m.name}</h4>
-                    </div>
-                    <div class="grid grid-cols-2 gap-y-1.5 gap-x-2 text-xs text-gray-500 pt-1 border-t border-gray-50">
-                        <div><strong class="text-gray-700 font-medium">Trường:</strong> ${m.uni || 'Tôn Đức Thắng'}</div>
-                        <div><strong class="text-gray-700 font-medium">Ngành:</strong> ${m.major || 'Kiến trúc'}</div>
-                        <div><strong class="text-gray-700 font-medium">Niên khóa:</strong> ${m.term}</div>
-                        <div><strong class="text-gray-700 font-medium">Học bổng:</strong> ${m.scholarship || 'Không'}</div>
-                    </div>
-                    ${m.phone ? `
-                    <div class="pt-2 flex items-center space-x-1 text-xs text-gray-600 font-semibold">
-                        <i data-lucide="phone" class="w-3.5 h-3.5 text-green-500"></i>
-                        <span>${m.phone}</span>
-                    </div>` : ''}
-                `;
-                container.appendChild(card);
+            getActiveMembers().filter(m => m.team === team).forEach(m => {
+                const actionButtonHtml = isAdmin ? `<button onclick="openMemberEditor('${m.id}')" class="px-2 py-1 bg-gray-50 hover:bg-blue-50 text-gray-500 hover:text-blue-600 font-bold text-[9px] rounded-lg border border-gray-200/50 transition">Sửa hồ sơ</button>` : `<span class="text-[9px] text-gray-300 italic">Quyền xem hồ sơ</span>`;
+                container.innerHTML += `<div class="bg-white p-4 rounded-2xl border border-gray-200/60 shadow-sm flex space-x-3 relative overflow-hidden"><img src="${m.avatar || 'https://placehold.co/100x100/e2e8f0/64748b?text=Avatar'}" class="w-16 h-16 rounded-full object-cover flex-shrink-0"><div class="flex-1 min-w-0"><span class="text-[9px] font-bold text-blue-500 block h-3">${m.saint || ''}</span><h4 class="text-sm font-black text-gray-900 truncate">${m.name}</h4><div class="grid grid-cols-2 gap-x-2 text-[10px] text-gray-400 mt-1"><div class="truncate"><strong>Trường:</strong> ${m.uni || '-'}</div><div class="truncate"><strong>Ngành:</strong> ${m.major || '-'}</div></div><div class="flex justify-between items-center mt-2 pt-1.5 border-t border-gray-100"><span class="text-[10px] text-gray-500 font-semibold">${m.phone || 'Chưa có SĐT'}</span>${actionButtonHtml}</div></div></div>`;
             });
-            lucide.createIcons();
         }
 
-        // Chuyển đổi Tab
-        function switchTab(tabName) {
-            ["attendance", "ranking", "members"].forEach(t => {
-                document.getElementById(`tab-content-${t}`).classList.add("hidden");
-                const btn = document.getElementById(`nav-btn-${t}`);
-                btn.classList.remove("text-blue-600", "font-bold");
-                btn.classList.add("text-gray-400", "font-medium");
+        function openMemberEditor(mId) {
+            if (currentUser.role !== 'admin') return;
+            const m = getActiveMembers().find(mem => mem.id === mId); if (!m) return;
+            document.getElementById("edit-mem-id").value = m.id; document.getElementById("edit-mem-saint").value = m.saint || ""; document.getElementById("edit-mem-name").value = m.name || ""; document.getElementById("edit-mem-uni").value = m.uni || ""; document.getElementById("edit-mem-major").value = m.major || ""; document.getElementById("edit-mem-term").value = m.term || ""; document.getElementById("edit-mem-phone").value = m.phone || ""; document.getElementById("edit-mem-avatar-preview").src = m.avatar || "https://placehold.co/100x100/e2e8f0/64748b?text=Avatar";
+            tempAvatarBase64 = m.avatar || ""; document.getElementById("member-edit-modal").classList.remove("hidden");
+        }
+
+        function previewMemberAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) { tempAvatarBase64 = e.target.result; document.getElementById("edit-mem-avatar-preview").src = tempAvatarBase64; }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function closeMemberEditor() { document.getElementById("member-edit-modal").classList.add("hidden"); }
+
+        function saveMemberData() {
+            if (currentUser.role !== 'admin') return;
+            const id = document.getElementById("edit-mem-id").value; const list = getActiveMembers(); const idx = list.findIndex(m => m.id === id);
+            if (idx !== -1) {
+                list[idx].saint = document.getElementById("edit-mem-saint").value.trim(); list[idx].name = document.getElementById("edit-mem-name").value.trim(); list[idx].uni = document.getElementById("edit-mem-uni").value.trim(); list[idx].major = document.getElementById("edit-mem-major").value.trim(); list[idx].term = document.getElementById("edit-mem-term").value.trim(); list[idx].phone = document.getElementById("edit-mem-phone").value.trim(); list[idx].avatar = tempAvatarBase64;
+                localStorage.setItem("TT_Dynamic_Members", JSON.stringify(list)); closeMemberEditor(); setupInterfaceAccess();
+            }
+        }
+
+        function renderSecurityAccountsTable() {
+            if (currentUser.role !== 'admin') return;
+            const accountsDb = getAccountsDatabase(); const tbody = document.getElementById("security-accounts-table"); tbody.innerHTML = "";
+            Object.keys(accountsDb).forEach(usernameKey => {
+                const acc = accountsDb[usernameKey];
+                tbody.innerHTML += `<tr class="border-b border-gray-50 py-2"><td class="py-2.5 font-bold text-gray-800">${usernameKey}</td><td class="py-2.5 text-gray-400">${acc.label}</td><td class="py-2.5"><input type="text" id="pass-input-${usernameKey}" value="${acc.pass}" class="w-24 bg-gray-50 border border-gray-200 rounded-lg px-1.5 py-1 font-mono text-xs focus:ring-1 focus:ring-blue-500"></td><td class="py-2.5 text-right"><button onclick="updateAccountPassword('${usernameKey}')" class="px-2 py-1 bg-blue-600 text-white font-bold rounded-lg text-[10px] shadow-sm">Đổi</button></td></tr>`;
             });
+        }
 
-            document.getElementById(`tab-content-${tabName}`).classList.remove("hidden");
-            const activeBtn = document.getElementById(`nav-btn-${tabName}`);
-            activeBtn.classList.remove("text-gray-400", "font-medium");
-            activeBtn.classList.add("text-blue-600", "font-bold");
+        function updateAccountPassword(usernameKey) {
+            if (currentUser.role !== 'admin') return;
+            const newPasswordVal = document.getElementById(`pass-input-${usernameKey}`).value.trim(); if (!newPasswordVal) return alert("Mật khẩu trống!");
+            const accountsDb = getAccountsDatabase(); accountsDb[usernameKey].pass = newPasswordVal;
+            localStorage.setItem("TT_Accounts_Database", JSON.stringify(accountsDb)); alert(`Đã cập nhật mật khẩu mới cho [ ${usernameKey} ]!`); renderSecurityAccountsTable();
+        }
 
-            if (tabName === 'attendance') renderAttendanceTable();
-            if (tabName === 'ranking') renderRankingList();
-            if (tabName === 'members') renderMemberCards();
+        function exportToCSV() {
+            const attDb = JSON.parse(localStorage.getItem("TT_Attendance")); const disDb = JSON.parse(localStorage.getItem("TT_Discipline")); const members = getActiveMembers();
+            let csvContent = "\uFEFF"; csvContent += "Năm,Tháng,Đội,Mã số,Tên Thánh,Họ Tên,Tuần 1 DD,Tuần 1 VP,Tuần 2 DD,Tuần 2 VP,Tuần 3 DD,Tuần 3 VP,Tuần 4 DD,Tuần 4 VP,Tổng điểm Tháng\n";
+            members.forEach(m => {
+                let score = 100; let weeksData = [];
+                for(let w = 1; w <= 4; w++) {
+                    const aV = attDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || "X"; const dV = disDb[`${m.id}_${currentYear}_${currentMonth}_W${w}`] || 0;
+                    if (aV === "K") score -= 10; else if (aV === "P") score -= 2; score -= (parseInt(dV) * 5); weeksData.push(aV, dV);
+                }
+                csvContent += `${currentYear},${currentMonth},"${TEAMS_NAME_MAP[m.team]}",${m.id},"${m.saint || ''}","${m.name}",${weeksData.join(',')},${score}\n`;
+            });
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); const link = document.createElement("a"); link.href = URL.createObjectURL(blob); link.setAttribute("download", `BaoCao_ThiDua_${currentMonth.replace(' ', '')}_Nam_${currentYear}.csv`); document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        }
+
+        function switchTab(tName) {
+            ['attendance', 'ranking', 'members', 'security'].forEach(t => {
+                document.getElementById(`tab-content-${t}`).classList.add("hidden"); const btn = document.getElementById(`nav-btn-${t}`);
+                if(btn) { btn.classList.remove("text-blue-600", "font-bold"); btn.classList.add("text-gray-400", "font-medium"); }
+            });
+            document.getElementById(`tab-content-${tName}`).classList.remove("hidden"); const actBtn = document.getElementById(`nav-btn-${tName}`);
+            if(actBtn) { actBtn.classList.remove("text-gray-400", "font-medium"); actBtn.classList.add("text-blue-600", "font-bold"); }
+            setupInterfaceAccess();
         }
     </script>
 </body>
 </html>
+
